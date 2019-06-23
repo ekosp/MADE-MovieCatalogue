@@ -1,10 +1,8 @@
 package com.ekosp.dicoding.moviecatalogue;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,7 +36,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         movieCover = findViewById(R.id.img_cover);
 
         movieTitle.setText(movie.getTitle());
-        releaseDate.setText(movie.getYear());
+        releaseDate.setText(movie.getReleaseDate());
         movieOverview.setText(movie.getOverview());
         movieCover.setImageDrawable(getResources().getDrawable(movie.getCover()));
         scoreView.setValue((float) movie.getScore());

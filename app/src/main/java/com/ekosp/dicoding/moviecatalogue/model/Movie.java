@@ -15,7 +15,7 @@ public class Movie implements Parcelable {
     private String title;
     private String overview;
     private Integer score;
-    private String year;
+    private String releaseDate;
 
     public Movie(){
 
@@ -26,7 +26,7 @@ public class Movie implements Parcelable {
         title = in.readString();
         overview = in.readString();
         score = in.readInt();
-        year = in.readString();
+        releaseDate = in.readString();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Movie implements Parcelable {
         dest.writeString(title);
         dest.writeString(overview);
         dest.writeInt(score);
-        dest.writeString(year);
+        dest.writeString(releaseDate);
     }
 
     @Override
@@ -87,11 +87,11 @@ public class Movie implements Parcelable {
         this.score = score;
     }
 
-    public String getYear() {
-        return year;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 }
