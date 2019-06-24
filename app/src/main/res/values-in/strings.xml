@@ -132,10 +132,11 @@
         <item>@drawable/poster_arrow</item>
     </array>
     <string name="more_info">Info Lengkap</string>
-    <string name="user_score">Score\\nPengguna</string>
+    <string name="user_score">Score\nPengguna</string>
     <string name="overview">Ikhtisar</string>
     <string name="movies">Filem</string>
     <string name="tv_shows">Acara TV</string>
+    <string name="detail_info">Informasi Lengkap</string>
 
 
 </resources>

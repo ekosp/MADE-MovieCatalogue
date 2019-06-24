@@ -32,7 +32,7 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Detail Info");
+        getSupportActionBar().setTitle(getResources().getString(R.string.detail_info));
 
         String fragmentId = getIntent().getStringExtra("fragment_id");
 
