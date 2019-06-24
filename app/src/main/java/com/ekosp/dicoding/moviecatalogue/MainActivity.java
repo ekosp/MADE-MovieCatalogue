@@ -1,16 +1,20 @@
 package com.ekosp.dicoding.moviecatalogue;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ekosp.dicoding.moviecatalogue.adapter.TabAdapter;
-import com.ekosp.dicoding.moviecatalogue.fragment.Tab1Fragment;
-import com.ekosp.dicoding.moviecatalogue.fragment.Tab2Fragment;
+import com.ekosp.dicoding.moviecatalogue.fragment.MovieListFragment;
+import com.ekosp.dicoding.moviecatalogue.fragment.TvshowListFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
@@ -28,15 +32,20 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.ic_heart_white
     };
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        setSupportActionBar(toolbar);
+
         adapter = new TabAdapter(getSupportFragmentManager(), this);
-        adapter.addFragment(new Tab1Fragment(), "Movies", tabIcons[0]);
-        adapter.addFragment(new Tab2Fragment(), "TV Show", tabIcons[1]);
+        adapter.addFragment(new MovieListFragment(), getResources().getString(R.string.movies), tabIcons[0]);
+        adapter.addFragment(new TvshowListFragment(), getResources().getString(R.string.tv_shows), tabIcons[1]);
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -75,25 +84,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Toast.makeText(MainActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+        if (id == R.id.settings) {
+            Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(mIntent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }

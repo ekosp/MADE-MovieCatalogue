@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_left_margin">8dp</dimen>
+    <dimen name="medium_circle_action">50dp</dimen>
+    <dimen name="icon_circled_size">15dp</dimen>
+</resources>

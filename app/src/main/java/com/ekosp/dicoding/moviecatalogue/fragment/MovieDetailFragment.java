@@ -1,6 +1,7 @@
 package com.ekosp.dicoding.moviecatalogue.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,9 @@ public class MovieDetailFragment extends Fragment {
     @BindView(R.id.img_cover)
     ImageView movieCover;
 
+    int pStatus = 0;
+    private Handler handler = new Handler();
+
     public static MovieDetailFragment newInstance(Movie movie) {
         MovieDetailFragment myFragment = new MovieDetailFragment();
 
@@ -63,6 +67,24 @@ public class MovieDetailFragment extends Fragment {
         releaseDate.setText(movie.getReleaseDate());
         movieOverview.setText(movie.getOverview());
         movieCover.setImageDrawable(getResources().getDrawable(movie.getCover()));
-        scoreView.setValue((float) movie.getScore());
+
+        fillScorePoint(movie);
+    }
+
+    private void fillScorePoint(Movie movie) {
+        new Thread(() -> {
+            // TODO Auto-generated method stub
+            while (pStatus < movie.getScore()) {
+                pStatus += 1;
+                handler.post(() -> scoreView.setValue((float) pStatus));
+                try {
+                    // Sleep for 200 milliseconds.
+                    // Just to display the progress slowly
+                    Thread.sleep(50); //thread will take approx 3 seconds to finish
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }
