@@ -14,4 +14,47 @@
         <item name="titleTextColor">@color/white</item>
     </style>
 
+    <style name="DialogTheme" parent="Material.App.Dialog">
+
+        <!--<item name="di_dimAmount">0.5</item>-->
+        <!--<item name="di_backgroundColor">@color/transparentColor</item>-->
+        <!--<item name="di_elevation">0dp</item>-->
+        <!--<item name="di_maxElevation">4dp</item>-->
+        <item name="di_cornerRadius">10dp</item>
+        <!--<item name="di_layoutDirection">locale</item>-->
+        <!--<item name="di_titleTextAppearance">@style/TextAppearance.AppCompat.Title</item>-->
+        <!--<item name="di_titleTextColor">@color/abc_primary_text_material_dark</item>-->
+        <!--<item name="di_actionRipple">@style/Material.Drawable.Ripple.Wave</item>-->
+        <!--<item name="di_actionTextAppearance">@style/TextAppearance.AppCompat.Button</item>-->
+        <!--<item name="di_actionTextColor">?attr/colorControlActivated</item>-->
+        <!--<item name="di_dividerColor">@color/transparentColor</item>-->
+        <!--<item name="di_dividerHeight">0dp</item>-->
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- Circular Progress Dialog Theme -->
+    <style name="CircularProgress" parent="Material.Drawable.CircularProgress">
+        <item name="cpd_padding">26dp</item>
+        <!--<item name="cpd_initialAngle">0</item>-->
+        <!--<item name="cpd_maxSweepAngle">270</item>-->
+        <!--<item name="cpd_minSweepAngle">1</item>-->
+        <!--<item name="cpd_strokeSize">4dp</item>-->
+        <item name="cpd_strokeColor">@color/green_forest</item>
+        <!--<item name="cpd_strokeSecondaryColor">@android:color/transparent</item>-->
+        <!--<item name="cpd_reverse">false</item>-->
+        <!--<item name="cpd_rotateDuration">1000</item>-->
+        <!--<item name="cpd_transformDuration">600</item>-->
+        <!--<item name="cpd_keepDuration">200</item>-->
+        <!--<item name="cpd_transformInterpolator">@android:anim/decelerate_interpolator</item>-->
+        <!--<item name="pv_progressMode">indeterminate</item>-->
+        <!--<item name="cpd_inAnimDuration">0</item>-->
+        <!--<item name="cpd_outAnimDuration">@android:integer/config_mediumAnimTime</item>-->
+    </style>
+
 </resources>

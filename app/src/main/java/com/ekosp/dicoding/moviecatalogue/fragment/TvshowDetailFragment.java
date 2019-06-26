@@ -13,10 +13,8 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
-import com.ekosp.dicoding.moviecatalogue.model.Movie;
+import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
 import com.ekosp.dicoding.moviecatalogue.view.BaseFragment;
-
-import org.w3c.dom.Text;
 
 import at.grabner.circleprogress.CircleProgressView;
 import butterknife.BindView;
@@ -28,7 +26,7 @@ import butterknife.ButterKnife;
  * or contact me at ekosetyopurnomo@gmail.com
  */
 
-public class MovieDetailFragment extends BaseFragment {
+public class TvshowDetailFragment extends BaseFragment {
 
     @BindView(R.id.scoreView)
     CircleProgressView scoreView;
@@ -44,11 +42,11 @@ public class MovieDetailFragment extends BaseFragment {
     int pStatus = 0;
     private Handler handler = new Handler();
 
-    public static MovieDetailFragment newInstance(Movie movie) {
-        MovieDetailFragment myFragment = new MovieDetailFragment();
+    public static TvshowDetailFragment newInstance(Tvshow tvshow) {
+        TvshowDetailFragment myFragment = new TvshowDetailFragment();
 
         Bundle args = new Bundle();
-        args.putParcelable("movie", movie);
+        args.putParcelable("tvshow", tvshow);
         myFragment.setArguments(args);
 
         return myFragment;
@@ -60,28 +58,28 @@ public class MovieDetailFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
         ButterKnife.bind(this, view);
 
-        setMovieDetail(getArguments().getParcelable("movie"));
+        setTVshowDetail(getArguments().getParcelable("tvshow"));
 
         return view;
     }
 
-    void setMovieDetail(Movie movie) {
-        movieTitle.setText(movie.getTitle());
-        releaseDate.setText(movie.getReleaseDate());
-        movieOverview.setText(movie.getOverview());
+    void setTVshowDetail(Tvshow show) {
+        movieTitle.setText(show.getName());
+        releaseDate.setText(show.getFirstAirDate());
+        movieOverview.setText(show.getOverview());
 
         Glide.with(getActivity())
-                .load(GlobalVar.baseUrl_image500+movie.getBackdropPath())
+                .load(GlobalVar.baseUrl_image500+show.getBackdropPath())
                 .centerCrop()
                 .into(movieCover);
 
-        fillScorePoint(movie);
+        fillScorePoint(show);
     }
 
-    private void fillScorePoint(Movie movie) {
+    private void fillScorePoint(Tvshow show) {
         new Thread(() -> {
             // TODO Auto-generated method stub
-            while (pStatus < (movie.getVoteAverage()*10)) {
+            while (pStatus < (show.getVoteAverage() * 10)) {
                 pStatus += 1;
                 handler.post(() -> scoreView.setValue((float) pStatus));
                 try {

@@ -15,4 +15,12 @@
     <color name="divider">#B6B6B6</color>
     <color name="yellow">#FFFF00</color>
 
+    <color name="red_heart">#CD0000</color>
+    <color name="green_forest">#009E61</color>
+
+    <color name="more_light_gray">#f1f1f1</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="warm_grey">#9a9a9a</color>
+    <color name="light_gray">#d3d3d3</color>
+
 </resources>

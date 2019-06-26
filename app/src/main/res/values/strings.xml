@@ -7,6 +7,9 @@
     <string name="movies">Movies</string>
     <string name="tv_shows">TV Show</string>
     <string name="detail_info">Detail Info</string>
+    <string name="detail_movie">Movie Detail Info</string>
+    <string name="detail_tvshow">Tv Show Detail Info</string>
+    <string name="loading_info">Please Wait ...</string>
 
     <string-array name="data_name">
         <item>A Star Is Born</item>

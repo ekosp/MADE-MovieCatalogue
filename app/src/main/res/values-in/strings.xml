@@ -131,12 +131,15 @@
         <item>@drawable/poster_the_walking_dead</item>
         <item>@drawable/poster_arrow</item>
     </array>
+
     <string name="more_info">Info Lengkap</string>
     <string name="user_score">Score\nPengguna</string>
     <string name="overview">Ikhtisar</string>
     <string name="movies">Filem</string>
     <string name="tv_shows">Acara TV</string>
     <string name="detail_info">Informasi Lengkap</string>
-
+    <string name="detail_movie">Info Filem Selengkapnya</string>
+    <string name="detail_tvshow">Info TV Show Selengkapnya</string>
+    <string name="loading_info">Mohon Tunggu ...</string>
 
 </resources>

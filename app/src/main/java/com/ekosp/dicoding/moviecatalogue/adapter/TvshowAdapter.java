@@ -2,6 +2,7 @@ package com.ekosp.dicoding.moviecatalogue.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.tv.TvInputService;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
-import com.ekosp.dicoding.moviecatalogue.view.DetailActivity;
 import com.ekosp.dicoding.moviecatalogue.R;
+import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.model.Movie;
+import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
+import com.ekosp.dicoding.moviecatalogue.view.DetailActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import at.grabner.circleprogress.CircleProgressView;
@@ -29,9 +30,9 @@ import butterknife.ButterKnife;
  * or contact me at ekosetyopurnomo@gmail.com
  */
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder> {
+public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHolder> {
 
-    private List<Movie> moviesList = new ArrayList<>();
+    private List<Tvshow> tvshowList;
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -54,41 +55,37 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
 
         }
 
-        void bind(Movie movie) {
-            title.setText(movie.getTitle());
-            description.setText(movie.getOverview());
-            releaseDate.setText(movie.getReleaseDate());
-            score.setValue(movie.getVoteAverage() * 10);
+        void bind(Tvshow show) {
+            title.setText(show.getName());
+            description.setText(show.getOverview());
+            releaseDate.setText(show.getFirstAirDate());
+            score.setValue(show.getVoteAverage() * 10);
 
             Glide.with(context)
-                    .load(GlobalVar.baseUrl_image98 + movie.getPosterPath())
+                    .load(GlobalVar.baseUrl_image98+show.getPosterPath())
                     .centerCrop()
                     .into(cover);
         }
     }
 
-//    public MoviesAdapter(Context context) {
-//        this.context = context;
-//    }
 
-    public MoviesAdapter(List<Movie> moviesList, Context context) {
-        this.moviesList = moviesList;
+    public TvshowAdapter(List<Tvshow> tvshowList, Context context) {
+        this.tvshowList = tvshowList;
         this.context = context;
     }
 
-    public void setData(List<Movie> items) {
-        moviesList.clear();
-        moviesList.addAll(items);
+    public void setData(List<Tvshow> items) {
+        tvshowList.clear();
+        tvshowList.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void addItem(final Movie item) {
-        moviesList.add(item);
+    public void addItem(final Tvshow item) {
+        tvshowList.add(item);
         notifyDataSetChanged();
     }
-
     public void clearData() {
-        moviesList.clear();
+        tvshowList.clear();
     }
 
     @Override
@@ -101,19 +98,19 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Movie movie = moviesList.get(position);
-        holder.bind(movie);
+        Tvshow show = tvshowList.get(position);
+        holder.bind(show);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("fragment_id", "movie_detail");
-            intent.putExtra("movie", movie);
+            intent.putExtra("fragment_id", "tvshow_detail");
+            intent.putExtra("tvshow", show);
             context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return moviesList.size();
+        return tvshowList.size();
     }
 }

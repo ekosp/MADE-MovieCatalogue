@@ -1,17 +1,16 @@
-package com.ekosp.dicoding.moviecatalogue;
+package com.ekosp.dicoding.moviecatalogue.view;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.adapter.TabAdapter;
 import com.ekosp.dicoding.moviecatalogue.fragment.MovieListFragment;
 import com.ekosp.dicoding.moviecatalogue.fragment.TvshowListFragment;
