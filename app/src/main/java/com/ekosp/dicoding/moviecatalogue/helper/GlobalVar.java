@@ -16,4 +16,8 @@ public class GlobalVar {
     public static String baseUrl_image342 = "https://image.tmdb.org/t/p/w342/";
     public static String baseUrl_image500 = "https://image.tmdb.org/t/p/w500/";
 
+    public static final String DB_NAME = "db_movie";
+    public static final String TABEL_MOVIE = "tbl_movie";
+    public static final String TABEL_TVSHOW = "tbl_tvshow";
+
 }

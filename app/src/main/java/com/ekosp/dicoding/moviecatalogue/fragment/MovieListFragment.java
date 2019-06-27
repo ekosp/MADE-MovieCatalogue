@@ -19,6 +19,7 @@ import com.ekosp.dicoding.moviecatalogue.helper.DialogHelper;
 import com.ekosp.dicoding.moviecatalogue.helper.MovieTaskLoader;
 import com.ekosp.dicoding.moviecatalogue.model.Movie;
 import com.ekosp.dicoding.moviecatalogue.view.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.view.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,6 @@
 package com.ekosp.dicoding.moviecatalogue.fragment;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -70,8 +71,16 @@ public class MovieDetailFragment extends BaseFragment {
         releaseDate.setText(movie.getReleaseDate());
         movieOverview.setText(movie.getOverview());
 
+        String coverUrl;
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            //Do some stuff
+            coverUrl = movie.getPosterPath();
+        } else {
+            coverUrl = movie.getBackdropPath();
+        }
+
         Glide.with(getActivity())
-                .load(GlobalVar.baseUrl_image500+movie.getBackdropPath())
+                .load(GlobalVar.baseUrl_image500+coverUrl)
                 .centerCrop()
                 .into(movieCover);
 

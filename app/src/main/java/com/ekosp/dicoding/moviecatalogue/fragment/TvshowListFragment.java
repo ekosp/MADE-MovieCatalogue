@@ -27,6 +27,7 @@ import com.ekosp.dicoding.moviecatalogue.model.Movie;
 import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
 import com.ekosp.dicoding.moviecatalogue.model.TvshowListResponse;
 import com.ekosp.dicoding.moviecatalogue.view.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.view.HomeActivity;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -65,7 +66,6 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
         adapter = new TvshowAdapter(tvshows, getActivity());
         adapter.notifyDataSetChanged();
 
-//        getDialogHelper().initProgressDialog();
         rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovies.setAdapter(adapter);
 
@@ -78,14 +78,12 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     @NonNull
     @Override
     public Loader<List<Tvshow>> onCreateLoader(int id, @Nullable Bundle args) {
-//        getDialogHelper().showProgressDialog();
         return new TvshowTaskLoader(getActivity());
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Tvshow>> loader, List<Tvshow> data) {
         adapter.setData(data);
-//        getDialogHelper().dismissProgressDialog();
     }
 
     @Override
