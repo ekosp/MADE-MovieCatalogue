@@ -1,8 +1,8 @@
 package com.ekosp.dicoding.moviecatalogue.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -59,11 +59,24 @@ public class DetailActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
-        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivityForResult(myIntent, 0);
-        return true;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Toast.makeText(this, getResources().getString(R.string.disable_back_btn), Toast.LENGTH_SHORT).show();
+    }
+
+
 
 
 }

@@ -14,7 +14,7 @@ import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 @Entity(tableName = GlobalVar.TABEL_TVSHOW)
 public class Tvshow {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
     @ColumnInfo(name = "id")
     private Integer id;
 
@@ -28,10 +28,23 @@ public class Tvshow {
     private String firstAiringDate;
 
     @ColumnInfo(name = "score")
-    private String score;
+    private Float score;
 
     @ColumnInfo(name = "coverUrl")
     private String coverUrl;
+
+    @ColumnInfo(name = "backdrop")
+    private String backdrop;
+
+    public Tvshow(Integer id, String title, String overview, String firstAiringDate, Float score, String coverUrl, String backdrop) {
+        this.id = id;
+        this.title = title;
+        this.overview = overview;
+        this.firstAiringDate = firstAiringDate;
+        this.score = score;
+        this.coverUrl = coverUrl;
+        this.backdrop = backdrop;
+    }
 
     public Integer getId() {
         return id;
@@ -65,11 +78,11 @@ public class Tvshow {
         this.firstAiringDate = firstAiringDate;
     }
 
-    public String getScore() {
+    public Float getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Float score) {
         this.score = score;
     }
 
@@ -79,5 +92,13 @@ public class Tvshow {
 
     public void setCoverUrl(String coverUrl) {
         this.coverUrl = coverUrl;
+    }
+
+    public String getBackdrop() {
+        return backdrop;
+    }
+
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
     }
 }

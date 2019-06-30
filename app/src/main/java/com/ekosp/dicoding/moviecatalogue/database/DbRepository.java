@@ -8,6 +8,8 @@ import com.ekosp.dicoding.moviecatalogue.database.dao.TvshowDao;
 import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
 import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
 
+import java.util.List;
+
 /**
  * Created by Eko S.P on 27/10/2018.
  * email : ekosetyopurnomo@gmail.com
@@ -38,11 +40,12 @@ public class DbRepository {
      */
 
 
-    public void insertMovie(Movie movie) {
-        new insertMovieAsyncTask(mMovieiDao).execute(movie);
+    public Long insertMovie(Movie movie) {
+//        new insertMovieAsyncTask(mMovieiDao).execute(movie);
+        return mMovieiDao.insert(movie);
     }
 
-    private static class insertMovieAsyncTask extends AsyncTask<Movie, Void, Void> {
+    private static class insertMovieAsyncTask extends AsyncTask<Movie, Void, Long> {
 
         private MovieDao mAsyncTaskDao;
 
@@ -51,17 +54,30 @@ public class DbRepository {
         }
 
         @Override
-        protected Void doInBackground(final Movie... params) {
-            mAsyncTaskDao.insert(params[0]);
-            return null;
+        protected Long doInBackground(final Movie... params) {
+            return mAsyncTaskDao.insert(params[0]);
         }
     }
 
-    public void insertTvshow(Tvshow tv) {
-        new insertTvshowAsyncTask(mTvshowDao).execute(tv);
+    public List<Movie> getAllMovie(){
+        return mMovieiDao.getAllMovie();
     }
 
-    private static class insertTvshowAsyncTask extends AsyncTask<Tvshow, Void, Void> {
+    public Integer getMoviewById(Integer id){
+        return mMovieiDao.getMovieById(id);
+    }
+
+    public Integer deleteMovieById(Integer id){
+        return mMovieiDao.deleteMovieById(id);
+    }
+
+    public Long insertTvshow(Tvshow tv) {
+//        return new insertTvshowAsyncTask(mTvshowDao).execute(tv);
+        return mTvshowDao.insert(tv);
+
+    }
+
+    private static class insertTvshowAsyncTask extends AsyncTask<Tvshow, Void, Long> {
 
         private TvshowDao mAsyncTaskDao;
 
@@ -70,10 +86,21 @@ public class DbRepository {
         }
 
         @Override
-        protected Void doInBackground(final Tvshow... params) {
-            mAsyncTaskDao.insert(params[0]);
-            return null;
+        protected Long doInBackground(final Tvshow... params) {
+           return mAsyncTaskDao.insert(params[0]);
         }
+    }
+
+    public List<Tvshow> getAllTvshow(){
+        return mTvshowDao.getAllTvshow();
+    }
+
+    public Integer getTvshowById(Integer id){
+        return  mTvshowDao.getTvshowById(id);
+    }
+
+    public Integer deleteTvshowById(Integer id){
+         return mTvshowDao.deleteTvshowById(id);
     }
 
 }

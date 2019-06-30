@@ -3,16 +3,19 @@ package com.ekosp.dicoding.moviecatalogue.fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
+import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
 import com.ekosp.dicoding.moviecatalogue.view.BaseFragment;
@@ -39,9 +42,15 @@ public class TvshowDetailFragment extends BaseFragment {
     TextView movieOverview;
     @BindView(R.id.img_cover)
     ImageView movieCover;
+    @BindView(R.id.action_favorite)
+    ImageView actionFavorite;
 
     int pStatus = 0;
     private Handler handler = new Handler();
+    private Boolean isBookMarked = false;
+    private DbRepository dbRepository;
+    private Tvshow tvshow;
+    private final String TAG = TvshowListFragment.class.getSimpleName();
 
     public static TvshowDetailFragment newInstance(Tvshow tvshow) {
         TvshowDetailFragment myFragment = new TvshowDetailFragment();
@@ -53,28 +62,84 @@ public class TvshowDetailFragment extends BaseFragment {
         return myFragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        dbRepository = new DbRepository(getActivity());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
         ButterKnife.bind(this, view);
 
-        setTVshowDetail(getArguments().getParcelable("tvshow"));
+        tvshow = getArguments().getParcelable("tvshow");
+        setTVshowDetail();
+        setAction();
+
 
         return view;
     }
 
-    void setTVshowDetail(Tvshow show) {
-        movieTitle.setText(show.getName());
-        releaseDate.setText(show.getFirstAirDate());
-        movieOverview.setText(show.getOverview());
+    private void setAction() {
+        isBookMarked = dbRepository.getTvshowById(tvshow.getId()) > 0;
+        Log.e(TAG, "cek is favorite : " + tvshow.getId() + "? =" + isBookMarked);
+
+        setActionFavoriteIcon();
+
+        actionFavorite.setOnClickListener(v -> {
+            if (!isBookMarked) {
+                // new, save to favorite
+                Log.e(TAG, "save tvshow with id: " + tvshow.getId());
+                long result = dbRepository.insertTvshow(new com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow(
+                        tvshow.getId(),
+                        tvshow.getName(),
+                        tvshow.getOverview(),
+                        tvshow.getFirstAirDate(),
+                        tvshow.getVoteAverage(),
+                        tvshow.getPosterPath(),
+                        tvshow.getBackdropPath()
+                ));
+
+                if (result > 1) {
+                    isBookMarked = true;
+                    Toast.makeText(getActivity(), "Saved to list favorite", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                // remove from favorite
+                Log.e(TAG, "delete tvshow with id: " + tvshow.getId());
+                int result = dbRepository.deleteTvshowById(tvshow.getId());
+
+                if (result > 0) {
+                    isBookMarked = false;
+                    Toast.makeText(getActivity(), "Removed from list favorite", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            setActionFavoriteIcon();
+        });
+    }
+
+    void setActionFavoriteIcon() {
+        if (isBookMarked)
+            actionFavorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_white_24dp));
+        else
+            actionFavorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_border_black_24dp));
+
+    }
+
+    void setTVshowDetail() {
+        movieTitle.setText(tvshow.getName());
+        releaseDate.setText(tvshow.getFirstAirDate());
+        movieOverview.setText(tvshow.getOverview());
 
         String coverUrl;
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             //Do some stuff
-            coverUrl = show.getPosterPath();
+            coverUrl = tvshow.getPosterPath();
         } else {
-            coverUrl = show.getBackdropPath();
+            coverUrl = tvshow.getBackdropPath();
         }
 
         Glide.with(getActivity())
@@ -82,7 +147,7 @@ public class TvshowDetailFragment extends BaseFragment {
                 .centerCrop()
                 .into(movieCover);
 
-        fillScorePoint(show);
+        fillScorePoint(tvshow);
     }
 
     private void fillScorePoint(Tvshow show) {

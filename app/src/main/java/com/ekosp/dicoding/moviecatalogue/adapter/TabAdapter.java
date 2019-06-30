@@ -50,7 +50,7 @@ public class TabAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-//return mFragmentTitleList.get(position);
+        //return mFragmentTitleList.get(position);
         return null;
     }
 

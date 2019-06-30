@@ -31,8 +31,8 @@ public class FavoritesFragment extends BaseFragment {
     @BindView(R.id.viewPager)
     ViewPager viewPager;
     private int[] tabIcons = {
-            R.drawable.ic_bookmark_white_24dp,
-            R.drawable.ic_heart_white
+            R.drawable.ic_local_movies_white_24dp,
+            R.drawable.ic_live_tv_white_24dp
     };
 
     private Context mContext;
@@ -50,8 +50,8 @@ public class FavoritesFragment extends BaseFragment {
         ButterKnife.bind(this, view);
 
         adapter = new TabAdapter(getActivity().getSupportFragmentManager(), mContext);
-        adapter.addFragment(new MovieListFragment(), getResources().getString(R.string.movies), tabIcons[0]);
-        adapter.addFragment(new TvshowListFragment(), getResources().getString(R.string.tv_shows), tabIcons[1]);
+        adapter.addFragment(MovieListFragment.newInstance(true), getResources().getString(R.string.movies), tabIcons[0]);
+        adapter.addFragment(TvshowListFragment.newInstance(true), getResources().getString(R.string.tv_shows), tabIcons[1]);
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

@@ -11,12 +11,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
-import com.ekosp.dicoding.moviecatalogue.view.DetailActivity;
 import com.ekosp.dicoding.moviecatalogue.R;
+import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.model.Movie;
+import com.ekosp.dicoding.moviecatalogue.view.DetailActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import at.grabner.circleprogress.CircleProgressView;
@@ -31,7 +30,7 @@ import butterknife.ButterKnife;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder> {
 
-    private List<Movie> moviesList = new ArrayList<>();
+    private List<Movie> moviesList;
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -67,10 +66,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         }
     }
 
-//    public MoviesAdapter(Context context) {
-//        this.context = context;
-//    }
-
     public MoviesAdapter(List<Movie> moviesList, Context context) {
         this.moviesList = moviesList;
         this.context = context;
@@ -80,15 +75,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         moviesList.clear();
         moviesList.addAll(items);
         notifyDataSetChanged();
-    }
-
-    public void addItem(final Movie item) {
-        moviesList.add(item);
-        notifyDataSetChanged();
-    }
-
-    public void clearData() {
-        moviesList.clear();
     }
 
     @Override

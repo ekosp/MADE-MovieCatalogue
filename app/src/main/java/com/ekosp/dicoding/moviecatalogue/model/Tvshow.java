@@ -56,6 +56,10 @@ public class Tvshow implements Parcelable {
     @Expose
     private String posterPath;
 
+    public Tvshow(){
+
+    }
+
     protected Tvshow(Parcel in) {
         originalName = in.readString();
         name = in.readString();

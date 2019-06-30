@@ -20,4 +20,6 @@ public class GlobalVar {
     public static final String TABEL_MOVIE = "tbl_movie";
     public static final String TABEL_TVSHOW = "tbl_tvshow";
 
+    public static final String PARAM_IS_FAVORITE = "param_is_favorite";
+
 }

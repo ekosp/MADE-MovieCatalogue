@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/home_menu"
-        android:title="Movie"
-        android:icon="@drawable/ic_playlist_add_white_24dp"/>
+        android:title="@string/movie"
+        android:icon="@drawable/ic_local_movies_white_24dp"/>
 
     <item
         android:id="@+id/search_menu"
-        android:title="TV Show"
-        android:icon="@drawable/ic_format_list_bulleted_white_24dp"/>
+        android:title="@string/tv_show"
+        android:icon="@drawable/ic_live_tv_white_24dp"/>
 
     <item
         android:id="@+id/favorite_menu"
-        android:title="Favorite"
+        android:title="@string/favorite"
         android:icon="@drawable/ic_bookmark_white_24dp"/>
 
 </menu>

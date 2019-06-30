@@ -4,6 +4,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
@@ -20,14 +22,15 @@ import java.util.List;
 public interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Movie movie);
+    long insert(Movie movie);
 
-    @Query("DELETE FROM " + GlobalVar.TABEL_MOVIE)
-    int deleteAll();
+    @Query("DELETE FROM " + GlobalVar.TABEL_MOVIE+" WHERE id= :id")
+    int deleteMovieById(Integer id);
+
+    @Query("SELECT * FROM "+ GlobalVar.TABEL_MOVIE+" WHERE id= :id")
+    int getMovieById (Integer id);
 
     @Query("SELECT * from " + GlobalVar.TABEL_MOVIE)
     List<Movie> getAllMovie();
-
-
 
 }

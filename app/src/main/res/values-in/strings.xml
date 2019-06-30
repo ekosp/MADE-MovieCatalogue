@@ -141,8 +141,13 @@
     <string name="detail_movie">Info Filem Selengkapnya</string>
     <string name="detail_tvshow">Info TV Show Selengkapnya</string>
     <string name="loading_info">Mohon Tunggu ...</string>
-    <string name="movie_list">Daftra Filem</string>
+    <string name="movie_list">Daftar Filem</string>
     <string name="tv_show_list">Daftar Acara Tv</string>
     <string name="favorites_list">Daftar Favorite</string>
+    <string name="favorite">Favorit</string>
+    <string name="movie">Filem</string>
+    <string name="tv_show">Acara TV</string>
+    <string name="disable_back_btn">Tombol back dinonaktifkan</string>
+    <string name="exit_confirm">Tekan sekali lagi untuk keluar apps</string>
 
 </resources>

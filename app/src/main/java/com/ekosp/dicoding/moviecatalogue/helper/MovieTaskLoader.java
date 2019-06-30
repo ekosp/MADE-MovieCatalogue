@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.loader.content.AsyncTaskLoader;
 
+import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
 import com.ekosp.dicoding.moviecatalogue.model.Movie;
 import com.ekosp.dicoding.moviecatalogue.model.MovieListResponse;
 import com.google.gson.Gson;
@@ -26,11 +27,16 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<Movie>> {
 
     private List<Movie> mData;
     private boolean mHasResult = false;
+    private boolean mFavorite = false;
     private DialogHelper dialogHelper;
+    private DbRepository mRepository;
 
-    public MovieTaskLoader(final Context context) {
+
+    public MovieTaskLoader(final Context context, final Boolean isFavorite) {
         super(context);
         dialogHelper = new DialogHelper(context);
+        mRepository = new DbRepository(context);
+        mFavorite = isFavorite;
         onContentChanged();
     }
 
@@ -64,9 +70,29 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<Movie>> {
     @Override
     public List<Movie> loadInBackground() {
 
-        SyncHttpClient client = new SyncHttpClient();
+
+
         final List<Movie> movieItemList = new ArrayList<>();
+        SyncHttpClient client = new SyncHttpClient();
         String MOVIE_URL = "https://api.themoviedb.org/3/discover/movie?api_key=" + GlobalVar.moviedb_apikey + "&language=en-US";
+
+
+        if (mFavorite){
+            // load fata from db
+            List<com.ekosp.dicoding.moviecatalogue.database.entity.Movie> list = mRepository.getAllMovie();
+            for (com.ekosp.dicoding.moviecatalogue.database.entity.Movie m: list){
+                Movie movie = new Movie();
+                movie.setId(m.getId());
+                movie.setTitle(m.getTitle());
+                movie.setReleaseDate(m.getReleaseDate());
+                movie.setOverview(m.getOverview());
+                movie.setVoteAverage(m.getScore());
+                movie.setPosterPath(m.getCoverUrl());
+                movie.setBackdropPath(m.getBackdrop());
+                movieItemList.add(movie);
+            }
+
+        } else {
 
         client.get(MOVIE_URL, new AsyncHttpResponseHandler() {
             @Override
@@ -74,7 +100,6 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<Movie>> {
                 super.onStart();
                 setUseSynchronousMode(true);
             }
-
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -94,7 +119,7 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<Movie>> {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 //Jika response gagal maka , do nothing
             }
-        });
+        }); }
 
         return movieItemList;
     }

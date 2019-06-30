@@ -35,6 +35,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    private Boolean shouldAllowBack = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         // set default first opened fragment
-        changeFragment(new MovieListFragment());
+        changeFragment(MovieListFragment.newInstance(false));
         setTitle(getResources().getString(R.string.movie_list));
 
     }
@@ -57,17 +59,16 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         transaction.commit();
     }
 
-    // method listener untuk logika pemilihan
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Fragment fragment = null;
         switch (menuItem.getItemId()) {
             case R.id.home_menu:
-                fragment = new MovieListFragment();
+                fragment =  MovieListFragment.newInstance(false);
                 setTitle(getResources().getString(R.string.movie_list));
                 break;
             case R.id.search_menu:
-                fragment = new TvshowListFragment();
+                fragment =  TvshowListFragment.newInstance(false);
                 setTitle(getResources().getString(R.string.tv_show_list));
                 break;
             case R.id.favorite_menu:
@@ -101,6 +102,17 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     void setTitle(String s){
         getSupportActionBar().setTitle(s);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!shouldAllowBack) {
+            shouldAllowBack = true;
+            Toast.makeText(this, R.string.exit_confirm, Toast.LENGTH_SHORT).show();
+        } else {
+            super.onBackPressed();
+            finish();
+        }
     }
 }
 

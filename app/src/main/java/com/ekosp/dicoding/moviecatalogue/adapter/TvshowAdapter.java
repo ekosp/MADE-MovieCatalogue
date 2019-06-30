@@ -2,7 +2,6 @@ package com.ekosp.dicoding.moviecatalogue.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.tv.TvInputService;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
-import com.ekosp.dicoding.moviecatalogue.model.Movie;
 import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
 import com.ekosp.dicoding.moviecatalogue.view.DetailActivity;
 
@@ -62,7 +60,7 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHold
             score.setValue(show.getVoteAverage() * 10);
 
             Glide.with(context)
-                    .load(GlobalVar.baseUrl_image98+show.getPosterPath())
+                    .load(GlobalVar.baseUrl_image98 + show.getPosterPath())
                     .centerCrop()
                     .into(cover);
         }
@@ -84,6 +82,7 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHold
         tvshowList.add(item);
         notifyDataSetChanged();
     }
+
     public void clearData() {
         tvshowList.clear();
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.loader.content.AsyncTaskLoader;
 
+import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
 import com.ekosp.dicoding.moviecatalogue.model.Movie;
 import com.ekosp.dicoding.moviecatalogue.model.MovieListResponse;
 import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
@@ -28,21 +29,24 @@ public class TvshowTaskLoader extends AsyncTaskLoader<List<Tvshow>> {
 
     private List<Tvshow> mData;
     private boolean mHasResult = false;
+    private boolean mFavorite = false;
     private DialogHelper dialogHelper;
+    private DbRepository mRepository;
 
-
-    public TvshowTaskLoader(final Context context) {
+    public TvshowTaskLoader(final Context context, final Boolean isFavorite) {
         super(context);
         dialogHelper = new DialogHelper(context);
+        mRepository = new DbRepository(context);
+        mFavorite = isFavorite;
         onContentChanged();
     }
 
     @Override
     protected void onStartLoading() {
-        if (takeContentChanged())    {
+        if (takeContentChanged()) {
             forceLoad();
             dialogHelper.showProgressDialog();
-        }  else if (mHasResult)
+        } else if (mHasResult)
             deliverResult(mData);
     }
 
@@ -69,34 +73,51 @@ public class TvshowTaskLoader extends AsyncTaskLoader<List<Tvshow>> {
 
         SyncHttpClient client = new SyncHttpClient();
         final List<Tvshow> tvshowItemList = new ArrayList<>();
-       String TVSHOW_URL = "https://api.themoviedb.org/3/discover/tv?api_key=" + GlobalVar.moviedb_apikey + "&language=en-US";
+        String TVSHOW_URL = "https://api.themoviedb.org/3/discover/tv?api_key=" + GlobalVar.moviedb_apikey + "&language=en-US";
 
-        client.get(TVSHOW_URL, new AsyncHttpResponseHandler() {
-            @Override
-            public void onStart() {
-                super.onStart();
-                setUseSynchronousMode(true);
+        if (mFavorite) {
+            // load from db
+            List<com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow> list = mRepository.getAllTvshow();
+            for (com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow m : list) {
+                Tvshow tv = new Tvshow();
+                tv.setId(m.getId());
+                tv.setName(m.getTitle());
+                tv.setFirstAirDate(m.getFirstAiringDate());
+                tv.setOverview(m.getOverview());
+                tv.setVoteAverage(m.getScore());
+                tv.setPosterPath(m.getCoverUrl());
+                tv.setBackdropPath(m.getBackdrop());
+                tvshowItemList.add(tv);
             }
 
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                try {
-                    String result = new String(responseBody);
-                    Gson gson = new Gson();
-                    TvshowListResponse response = gson.fromJson(result, TvshowListResponse.class);
-                    tvshowItemList.addAll(response.getResults());
-
-                } catch (Exception e) {
-                    //Jika terjadi error pada saat parsing maka akan masuk ke catch()
-                    e.printStackTrace();
+        } else {
+            client.get(TVSHOW_URL, new AsyncHttpResponseHandler() {
+                @Override
+                public void onStart() {
+                    super.onStart();
+                    setUseSynchronousMode(true);
                 }
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                //Jika response gagal maka , do nothing
-            }
-        });
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    try {
+                        String result = new String(responseBody);
+                        Gson gson = new Gson();
+                        TvshowListResponse response = gson.fromJson(result, TvshowListResponse.class);
+                        tvshowItemList.addAll(response.getResults());
+
+                    } catch (Exception e) {
+                        //Jika terjadi error pada saat parsing maka akan masuk ke catch()
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    //Jika response gagal maka , do nothing
+                }
+            });
+        }
 
         return tvshowItemList;
     }

@@ -1,6 +1,5 @@
 package com.ekosp.dicoding.moviecatalogue.fragment;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,36 +7,20 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.loader.app.LoaderManager;
-import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ekosp.dicoding.moviecatalogue.R;
-import com.ekosp.dicoding.moviecatalogue.adapter.MoviesAdapter;
 import com.ekosp.dicoding.moviecatalogue.adapter.TvshowAdapter;
-import com.ekosp.dicoding.moviecatalogue.helper.DialogHelper;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
-import com.ekosp.dicoding.moviecatalogue.helper.MovieTaskLoader;
 import com.ekosp.dicoding.moviecatalogue.helper.TvshowTaskLoader;
-import com.ekosp.dicoding.moviecatalogue.model.Movie;
 import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
-import com.ekosp.dicoding.moviecatalogue.model.TvshowListResponse;
 import com.ekosp.dicoding.moviecatalogue.view.BaseFragment;
-import com.ekosp.dicoding.moviecatalogue.view.HomeActivity;
-import com.google.gson.Gson;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,10 +36,20 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     private List<Tvshow> tvshows = new ArrayList<>();
     private TvshowAdapter adapter;
 
-    private static final int MOVIE_LOADER = 21;
+    private static final int TVSHOW_LOADER = 51;
 
     @BindView(R.id.rv_movies)
     RecyclerView rvMovies;
+
+    public static TvshowListFragment newInstance(Boolean isFavorite) {
+        TvshowListFragment fragment = new TvshowListFragment();
+
+        Bundle args = new Bundle();
+        args.putBoolean(GlobalVar.PARAM_IS_FAVORITE, isFavorite);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,16 +62,25 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
         rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovies.setAdapter(adapter);
 
-        getLoaderManager().initLoader(MOVIE_LOADER, null, this);
+        getLoaderManager().initLoader(TVSHOW_LOADER, getArguments(), this);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getArguments().getBoolean(GlobalVar.PARAM_IS_FAVORITE))
+            getLoaderManager().restartLoader(TVSHOW_LOADER, getArguments(), this);
+
     }
 
 
     @NonNull
     @Override
     public Loader<List<Tvshow>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new TvshowTaskLoader(getActivity());
+        boolean isFavorite = args.getBoolean(GlobalVar.PARAM_IS_FAVORITE);
+        return new TvshowTaskLoader(getActivity(), isFavorite);
     }
 
     @Override
@@ -90,7 +92,6 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     public void onLoaderReset(@NonNull Loader<List<Tvshow>> loader) {
         adapter.setData(null);
     }
-
 
 
 }

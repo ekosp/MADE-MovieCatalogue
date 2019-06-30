@@ -20,11 +20,13 @@ import java.util.List;
 public interface TvshowDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Tvshow tvshow);
+    long insert(Tvshow tvshow);
 
-    @Query("DELETE FROM " + GlobalVar.TABEL_TVSHOW)
-    int deleteAll();
+    @Query("DELETE FROM " + GlobalVar.TABEL_TVSHOW+" WHERE id= :id")
+    int deleteTvshowById(Integer id);
 
+    @Query("SELECT * FROM "+ GlobalVar.TABEL_TVSHOW+" WHERE id= :id")
+    int getTvshowById (Integer id);
 
     @Query("SELECT * from " + GlobalVar.TABEL_TVSHOW)
     List<Tvshow> getAllTvshow();
