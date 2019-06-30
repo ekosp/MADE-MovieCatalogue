@@ -18,6 +18,7 @@ import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.helper.MovieTaskLoader;
 import com.ekosp.dicoding.moviecatalogue.model.Movie;
 import com.ekosp.dicoding.moviecatalogue.view.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.view.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,7 @@ public class MovieListFragment extends BaseFragment implements LoaderManager.Loa
         rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovies.setAdapter(adapter);
 
-        getLoaderManager().initLoader(MOVIE_LOADER, getArguments(), this);
+        getActivity().getSupportLoaderManager().initLoader(MOVIE_LOADER, getArguments(), this);
 
         return view;
     }
@@ -71,7 +72,7 @@ public class MovieListFragment extends BaseFragment implements LoaderManager.Loa
     public void onResume() {
         super.onResume();
         if (getArguments().getBoolean(GlobalVar.PARAM_IS_FAVORITE))
-            getLoaderManager().restartLoader(MOVIE_LOADER, getArguments(), this);
+            getActivity().getSupportLoaderManager().restartLoader(MOVIE_LOADER, getArguments(), this);
     }
 
     @NonNull

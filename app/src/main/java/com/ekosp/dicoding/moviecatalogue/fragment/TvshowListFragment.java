@@ -62,7 +62,7 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
         rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovies.setAdapter(adapter);
 
-        getLoaderManager().initLoader(TVSHOW_LOADER, getArguments(), this);
+        getActivity().getSupportLoaderManager().initLoader(TVSHOW_LOADER, getArguments(), this);
 
         return view;
     }
@@ -71,7 +71,7 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     public void onResume() {
         super.onResume();
         if (getArguments().getBoolean(GlobalVar.PARAM_IS_FAVORITE))
-            getLoaderManager().restartLoader(TVSHOW_LOADER, getArguments(), this);
+            getActivity().getSupportLoaderManager().restartLoader(TVSHOW_LOADER, getArguments(), this);
 
     }
 
