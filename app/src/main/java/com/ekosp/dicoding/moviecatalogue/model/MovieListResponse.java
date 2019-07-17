@@ -3,6 +3,7 @@ package com.ekosp.dicoding.moviecatalogue.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

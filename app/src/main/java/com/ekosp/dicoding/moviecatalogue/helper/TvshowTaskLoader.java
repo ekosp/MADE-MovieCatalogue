@@ -5,9 +5,7 @@ import android.content.Context;
 import androidx.loader.content.AsyncTaskLoader;
 
 import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
-import com.ekosp.dicoding.moviecatalogue.model.Movie;
-import com.ekosp.dicoding.moviecatalogue.model.MovieListResponse;
-import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
+import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
 import com.ekosp.dicoding.moviecatalogue.model.TvshowListResponse;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -71,8 +69,8 @@ public class TvshowTaskLoader extends AsyncTaskLoader<List<Tvshow>> {
     @Override
     public List<Tvshow> loadInBackground() {
 
+        List<Tvshow> tvshowItemList = new ArrayList<>();
         SyncHttpClient client = new SyncHttpClient();
-        final List<Tvshow> tvshowItemList = new ArrayList<>();
         String TVSHOW_URL = "https://api.themoviedb.org/3/discover/tv?api_key=" + GlobalVar.moviedb_apikey + "&language=en-US";
 
         if (mFavorite) {
@@ -81,12 +79,12 @@ public class TvshowTaskLoader extends AsyncTaskLoader<List<Tvshow>> {
             for (com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow m : list) {
                 Tvshow tv = new Tvshow();
                 tv.setId(m.getId());
-                tv.setName(m.getTitle());
-                tv.setFirstAirDate(m.getFirstAiringDate());
+                tv.setTitle(m.getTitle());
+                tv.setFirstAiringDate(m.getFirstAiringDate());
                 tv.setOverview(m.getOverview());
-                tv.setVoteAverage(m.getScore());
-                tv.setPosterPath(m.getCoverUrl());
-                tv.setBackdropPath(m.getBackdrop());
+                tv.setVoteAverage(m.getVoteAverage());
+                tv.setPosterPath(m.getPosterPath());
+                tv.setBackdropPath(m.getBackdropPath());
                 tvshowItemList.add(tv);
             }
 
@@ -119,7 +117,7 @@ public class TvshowTaskLoader extends AsyncTaskLoader<List<Tvshow>> {
             });
         }
 
-        return tvshowItemList;
+        return mData;
     }
 
 }

@@ -16,9 +16,9 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
+import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
-import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
-import com.ekosp.dicoding.moviecatalogue.view.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
 
 import at.grabner.circleprogress.CircleProgressView;
 import butterknife.BindView;
@@ -93,9 +93,9 @@ public class TvshowDetailFragment extends BaseFragment {
                 Log.e(TAG, "save tvshow with id: " + tvshow.getId());
                 long result = dbRepository.insertTvshow(new com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow(
                         tvshow.getId(),
-                        tvshow.getName(),
+                        tvshow.getTitle(),
                         tvshow.getOverview(),
-                        tvshow.getFirstAirDate(),
+                        tvshow.getFirstAiringDate(),
                         tvshow.getVoteAverage(),
                         tvshow.getPosterPath(),
                         tvshow.getBackdropPath()
@@ -130,8 +130,8 @@ public class TvshowDetailFragment extends BaseFragment {
     }
 
     void setTVshowDetail() {
-        movieTitle.setText(tvshow.getName());
-        releaseDate.setText(tvshow.getFirstAirDate());
+        movieTitle.setText(tvshow.getTitle());
+        releaseDate.setText(tvshow.getFirstAiringDate());
         movieOverview.setText(tvshow.getOverview());
 
         String coverUrl;

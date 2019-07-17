@@ -18,6 +18,8 @@
     <string name="movie">Movie</string>
     <string name="exit_confirm">Press once again to exit apps</string>
     <string name="disable_back_btn">Back button has been disable</string>
+    <string name="search_hint">Type Your Keyword Here ...</string>
+    <string name="errorString">no internet connection</string>
 
     <string-array name="data_name">
         <item>A Star Is Born</item>

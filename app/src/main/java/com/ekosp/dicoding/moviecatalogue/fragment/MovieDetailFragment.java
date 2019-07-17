@@ -16,9 +16,10 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
+import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
+import com.ekosp.dicoding.moviecatalogue.fragment.movielist.MovieListFragment;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
-import com.ekosp.dicoding.moviecatalogue.model.Movie;
-import com.ekosp.dicoding.moviecatalogue.view.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
 
 import at.grabner.circleprogress.CircleProgressView;
 import butterknife.BindView;

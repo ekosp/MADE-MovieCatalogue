@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
+import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
-import com.ekosp.dicoding.moviecatalogue.model.Movie;
 import com.ekosp.dicoding.moviecatalogue.view.DetailActivity;
 
 import java.util.List;

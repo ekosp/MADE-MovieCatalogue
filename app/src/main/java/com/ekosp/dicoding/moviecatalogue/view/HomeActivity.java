@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,12 +15,9 @@ import android.widget.Toast;
 
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.fragment.FavoritesFragment;
-import com.ekosp.dicoding.moviecatalogue.fragment.MovieListFragment;
+import com.ekosp.dicoding.moviecatalogue.fragment.movielist.MovieListFragment;
 import com.ekosp.dicoding.moviecatalogue.fragment.TvshowListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -96,6 +90,14 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             startActivity(mIntent);
             return true;
         }
+
+        if (id == R.id.searchMenu) {
+            Intent mIntent = new Intent(this, Search2Activity.class);
+            startActivity(mIntent);
+            Toast.makeText(this, "search movie / tv show", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

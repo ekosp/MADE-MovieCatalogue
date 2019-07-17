@@ -1,10 +1,14 @@
-package com.ekosp.dicoding.moviecatalogue.view;
+package com.ekosp.dicoding.moviecatalogue.base;
 
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.ekosp.dicoding.moviecatalogue.di.AppComponent;
+import com.ekosp.dicoding.moviecatalogue.di.AppModule;
+import com.ekosp.dicoding.moviecatalogue.di.DaggerAppComponent;
+import com.ekosp.dicoding.moviecatalogue.di.UtilsModule;
 import com.ekosp.dicoding.moviecatalogue.helper.DialogHelper;
 
 /**
@@ -16,6 +20,7 @@ import com.ekosp.dicoding.moviecatalogue.helper.DialogHelper;
 public class BaseFragment extends Fragment {
 
     private DialogHelper dialogHelper;
+//    private AppComponent appComponent;
 
 
     @Override
@@ -24,6 +29,7 @@ public class BaseFragment extends Fragment {
 
         dialogHelper = new DialogHelper(getActivity());
         dialogHelper.initProgressDialog();
+//        appComponent = DaggerAppComponent.builder().appModule(new AppModule(getContext())).utilsModule(new UtilsModule()).build();
     }
 
     private DialogHelper getDialogHelper() {
@@ -36,5 +42,15 @@ public class BaseFragment extends Fragment {
     protected void dismissLoading() {
         getDialogHelper().dismissProgressDialog();
     }
+
+//    protected AppComponent getAppComponent() {
+//        return appComponent;
+//    }
+
+//    void inject(Fragment fragment){
+//        appComponent.doInjection(fragment);
+//    }
+
+
 
 }

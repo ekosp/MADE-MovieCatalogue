@@ -13,12 +13,12 @@ import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 
 /**
- * Created by Eko S.P on 27/10/2018.
+ * Created by Eko S.P on 27/05/2019.
  * email : ekosetyopurnomo@gmail.com
  * about me : http://ekosp.com
  */
 
-@Database(entities = {Movie.class, Tvshow.class}, version = 1, exportSchema = false)
+@Database(entities = {Movie.class, Tvshow.class}, version = 3, exportSchema = false)
 public abstract class MovieRoomDatabase extends RoomDatabase {
 
     abstract MovieDao movieDao();

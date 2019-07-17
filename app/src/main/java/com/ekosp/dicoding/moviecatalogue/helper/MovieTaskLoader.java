@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.loader.content.AsyncTaskLoader;
 
 import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
-import com.ekosp.dicoding.moviecatalogue.model.Movie;
+import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
 import com.ekosp.dicoding.moviecatalogue.model.MovieListResponse;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -72,7 +72,7 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<Movie>> {
 
 
 
-        final List<Movie> movieItemList = new ArrayList<>();
+         List<Movie> movieItemList = new ArrayList<>();
         SyncHttpClient client = new SyncHttpClient();
         String MOVIE_URL = "https://api.themoviedb.org/3/discover/movie?api_key=" + GlobalVar.moviedb_apikey + "&language=en-US";
 
@@ -86,9 +86,9 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<Movie>> {
                 movie.setTitle(m.getTitle());
                 movie.setReleaseDate(m.getReleaseDate());
                 movie.setOverview(m.getOverview());
-                movie.setVoteAverage(m.getScore());
-                movie.setPosterPath(m.getCoverUrl());
-                movie.setBackdropPath(m.getBackdrop());
+                movie.setVoteAverage(m.getVoteAverage());
+                movie.setPosterPath(m.getPosterPath());
+                movie.setBackdropPath(m.getBackdropPath());
                 movieItemList.add(movie);
             }
 

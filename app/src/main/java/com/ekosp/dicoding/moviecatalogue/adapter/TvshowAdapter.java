@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
+import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
-import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
 import com.ekosp.dicoding.moviecatalogue.view.DetailActivity;
 
 import java.util.List;
@@ -54,9 +54,9 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHold
         }
 
         void bind(Tvshow show) {
-            title.setText(show.getName());
+            title.setText(show.getTitle());
             description.setText(show.getOverview());
-            releaseDate.setText(show.getFirstAirDate());
+            releaseDate.setText(show.getFirstAiringDate());
             score.setValue(show.getVoteAverage() * 10);
 
             Glide.with(context)
@@ -78,14 +78,6 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHold
         notifyDataSetChanged();
     }
 
-    public void addItem(final Tvshow item) {
-        tvshowList.add(item);
-        notifyDataSetChanged();
-    }
-
-    public void clearData() {
-        tvshowList.clear();
-    }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

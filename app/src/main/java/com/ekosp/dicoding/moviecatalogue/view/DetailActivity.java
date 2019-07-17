@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ekosp.dicoding.moviecatalogue.R;
+import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
+import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
 import com.ekosp.dicoding.moviecatalogue.fragment.MovieDetailFragment;
 import com.ekosp.dicoding.moviecatalogue.fragment.TvshowDetailFragment;
-import com.ekosp.dicoding.moviecatalogue.model.Movie;
-import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

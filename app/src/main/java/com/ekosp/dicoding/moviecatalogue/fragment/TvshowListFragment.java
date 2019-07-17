@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.adapter.TvshowAdapter;
+import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.helper.TvshowTaskLoader;
-import com.ekosp.dicoding.moviecatalogue.model.Tvshow;
-import com.ekosp.dicoding.moviecatalogue.view.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +86,7 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     @Override
     public void onLoadFinished(@NonNull Loader<List<Tvshow>> loader, List<Tvshow> data) {
         adapter.setData(data);
+        dismissLoading();
     }
 
     @Override
