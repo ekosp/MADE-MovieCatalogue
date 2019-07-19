@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.adapter.TvshowAdapter;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
+import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewTvShow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.helper.TvshowTaskLoader;
-import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +31,9 @@ import butterknife.ButterKnife;
  * or contact me at ekosetyopurnomo@gmail.com
  */
 
-public class TvshowListFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<List<Tvshow>> {
+public class TvshowListFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<List<NewTvShow>> {
 
-    private List<Tvshow> tvshows = new ArrayList<>();
+    private List<NewTvShow> tvshows = new ArrayList<>();
     private TvshowAdapter adapter;
 
     private static final int TVSHOW_LOADER = 51;
@@ -75,22 +75,21 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
 
     }
 
-
     @NonNull
     @Override
-    public Loader<List<Tvshow>> onCreateLoader(int id, @Nullable Bundle args) {
+    public Loader<List<NewTvShow>> onCreateLoader(int id, @Nullable Bundle args) {
         boolean isFavorite = args.getBoolean(GlobalVar.PARAM_IS_FAVORITE);
         return new TvshowTaskLoader(getActivity(), isFavorite);
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<List<Tvshow>> loader, List<Tvshow> data) {
+    public void onLoadFinished(@NonNull Loader<List<NewTvShow>> loader, List<NewTvShow> data) {
         adapter.setData(data);
         dismissLoading();
     }
 
     @Override
-    public void onLoaderReset(@NonNull Loader<List<Tvshow>> loader) {
+    public void onLoaderReset(@NonNull Loader<List<NewTvShow>> loader) {
         adapter.setData(null);
     }
 

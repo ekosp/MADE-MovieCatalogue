@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ekosp.dicoding.moviecatalogue.R
 import com.ekosp.dicoding.moviecatalogue.api.ApiClient
 import com.ekosp.dicoding.moviecatalogue.api.MovieService
-import com.ekosp.dicoding.moviecatalogue.database.entity.Movie
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie
 import kotlinx.android.synthetic.main.app_bar_search.*
 
 /**
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.app_bar_search.*
 
 class Search2Activity : AppCompatActivity() {
 
-    var movies: MutableList<Movie> = mutableListOf()
+    var movies: MutableList<NewMovie> = mutableListOf()
     val movieService: MovieService = ApiClient.getClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {

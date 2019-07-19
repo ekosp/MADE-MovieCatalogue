@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ekosp.dicoding.moviecatalogue.R;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewTvShow;
 import com.ekosp.dicoding.moviecatalogue.fragment.MovieDetailFragment;
 import com.ekosp.dicoding.moviecatalogue.fragment.TvshowDetailFragment;
+
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,25 +32,29 @@ public class DetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(getResources().getString(R.string.detail_info));
+       if (getSupportActionBar() != null){
+           getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+           getSupportActionBar().setDisplayShowHomeEnabled(true);
+           getSupportActionBar().setTitle(getResources().getString(R.string.detail_info));
+       }
 
         String fragmentId = getIntent().getStringExtra("fragment_id");
 
-        switch (fragmentId) {
-            case "movie_detail":
-                getSupportActionBar().setTitle(getResources().getString(R.string.detail_movie));
-                Movie movie = getIntent().getParcelableExtra("movie");
-                new MovieDetailFragment();
-                changeFragment(MovieDetailFragment.newInstance(movie));
-                break;
-            case "tvshow_detail":
-                getSupportActionBar().setTitle(getResources().getString(R.string.detail_tvshow));
-                Tvshow show = getIntent().getParcelableExtra("tvshow");
-                new TvshowDetailFragment();
-                changeFragment(TvshowDetailFragment.newInstance(show));
-                break;
+        if (fragmentId != null) {
+            switch (fragmentId) {
+                case "movie_detail":
+                    getSupportActionBar().setTitle(getResources().getString(R.string.detail_movie));
+                    NewMovie movie = getIntent().getParcelableExtra("movie");
+                    new MovieDetailFragment();
+                    changeFragment(MovieDetailFragment.newInstance(movie));
+                    break;
+                case "tvshow_detail":
+                    getSupportActionBar().setTitle(getResources().getString(R.string.detail_tvshow));
+                    NewTvShow show = getIntent().getParcelableExtra("tvshow");
+                    new TvshowDetailFragment();
+                    changeFragment(TvshowDetailFragment.newInstance(show));
+                    break;
+            }
         }
     }
 
@@ -60,7 +66,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
@@ -72,7 +78,7 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
         Toast.makeText(this, getResources().getString(R.string.disable_back_btn), Toast.LENGTH_SHORT).show();
     }
 

@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.loader.content.AsyncTaskLoader;
 
 import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewTvShow;
 import com.ekosp.dicoding.moviecatalogue.model.TvshowListResponse;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -23,9 +23,9 @@ import cz.msebera.android.httpclient.Header;
  * or contact me at ekosetyopurnomo@gmail.com
  */
 
-public class TvshowTaskLoader extends AsyncTaskLoader<List<Tvshow>> {
+public class TvshowTaskLoader extends AsyncTaskLoader<List<NewTvShow>> {
 
-    private List<Tvshow> mData;
+    private List<NewTvShow> mData;
     private boolean mHasResult = false;
     private boolean mFavorite = false;
     private DialogHelper dialogHelper;
@@ -49,7 +49,7 @@ public class TvshowTaskLoader extends AsyncTaskLoader<List<Tvshow>> {
     }
 
     @Override
-    public void deliverResult(final List<Tvshow> data) {
+    public void deliverResult(final List<NewTvShow> data) {
         mData = data;
         mHasResult = true;
         dialogHelper.dismissProgressDialog();
@@ -67,26 +67,16 @@ public class TvshowTaskLoader extends AsyncTaskLoader<List<Tvshow>> {
     }
 
     @Override
-    public List<Tvshow> loadInBackground() {
+    public List<NewTvShow> loadInBackground() {
 
-        List<Tvshow> tvshowItemList = new ArrayList<>();
         SyncHttpClient client = new SyncHttpClient();
+        final List<NewTvShow> tvshowItemList = new ArrayList<>();
         String TVSHOW_URL = "https://api.themoviedb.org/3/discover/tv?api_key=" + GlobalVar.moviedb_apikey + "&language=en-US";
 
         if (mFavorite) {
             // load from db
-            List<com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow> list = mRepository.getAllTvshow();
-            for (com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow m : list) {
-                Tvshow tv = new Tvshow();
-                tv.setId(m.getId());
-                tv.setTitle(m.getTitle());
-                tv.setFirstAiringDate(m.getFirstAiringDate());
-                tv.setOverview(m.getOverview());
-                tv.setVoteAverage(m.getVoteAverage());
-                tv.setPosterPath(m.getPosterPath());
-                tv.setBackdropPath(m.getBackdropPath());
-                tvshowItemList.add(tv);
-            }
+            List<NewTvShow> list = mRepository.getAllTvshow();
+            tvshowItemList.addAll(list);
 
         } else {
             client.get(TVSHOW_URL, new AsyncHttpResponseHandler() {
@@ -117,7 +107,7 @@ public class TvshowTaskLoader extends AsyncTaskLoader<List<Tvshow>> {
             });
         }
 
-        return mData;
+        return tvshowItemList;
     }
 
 }

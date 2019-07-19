@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.view.DetailActivity;
 
@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder> {
 
-    private List<Movie> moviesList;
+    private List<NewMovie> moviesList;
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -53,25 +53,25 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
 
         }
 
-        void bind(Movie movie) {
+        void bind(NewMovie movie) {
             title.setText(movie.getTitle());
             description.setText(movie.getOverview());
-            releaseDate.setText(movie.getReleaseDate());
-            score.setValue(movie.getVoteAverage() * 10);
+            releaseDate.setText(movie.getRelease_date());
+            score.setValue(movie.getVote_average() * 10);
 
             Glide.with(context)
-                    .load(GlobalVar.baseUrl_image98 + movie.getPosterPath())
+                    .load(GlobalVar.baseUrl_image98 + movie.getPoster_path())
                     .centerCrop()
                     .into(cover);
         }
     }
 
-    public MoviesAdapter(List<Movie> moviesList, Context context) {
+    public MoviesAdapter(List<NewMovie> moviesList, Context context) {
         this.moviesList = moviesList;
         this.context = context;
     }
 
-    public void setData(List<Movie> items) {
+    public void setData(List<NewMovie> items) {
         moviesList.clear();
         moviesList.addAll(items);
         notifyDataSetChanged();
@@ -87,7 +87,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Movie movie = moviesList.get(position);
+        NewMovie movie = moviesList.get(position);
         holder.bind(movie);
 
         holder.itemView.setOnClickListener(v -> {

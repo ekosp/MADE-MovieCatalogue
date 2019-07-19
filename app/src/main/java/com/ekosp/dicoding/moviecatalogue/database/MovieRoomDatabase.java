@@ -8,8 +8,8 @@ import androidx.room.RoomDatabase;
 
 import com.ekosp.dicoding.moviecatalogue.database.dao.MovieDao;
 import com.ekosp.dicoding.moviecatalogue.database.dao.TvshowDao;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewTvShow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 
 /**
@@ -18,8 +18,8 @@ import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
  * about me : http://ekosp.com
  */
 
-@Database(entities = {Movie.class, Tvshow.class}, version = 3, exportSchema = false)
-public abstract class MovieRoomDatabase extends RoomDatabase {
+@Database(entities = {NewMovie.class, NewTvShow.class}, version = 4, exportSchema = false)
+abstract class MovieRoomDatabase extends RoomDatabase {
 
     abstract MovieDao movieDao();
 
@@ -42,8 +42,8 @@ public abstract class MovieRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    public static void destroyInstance() {
-        INSTANCE = null;
-    }
+//    public static void destroyInstance() {
+//        INSTANCE = null;
+//    }
 
 }

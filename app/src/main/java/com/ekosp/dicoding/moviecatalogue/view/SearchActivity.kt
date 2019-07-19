@@ -17,7 +17,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.view.KeyEvent.KEYCODE_HOME
 import android.view.KeyEvent
-import com.ekosp.dicoding.moviecatalogue.database.entity.Movie
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie
 
 
 /**
@@ -28,7 +28,7 @@ import com.ekosp.dicoding.moviecatalogue.database.entity.Movie
 
 class SearchActivity : AppCompatActivity() {
     //    lateinit var apiKey : String
-    var movies: MutableList<Movie> = mutableListOf()
+    var movies: MutableList<NewMovie> = mutableListOf()
     //    var adapter = MovieAdapter(movies)
     val movieService: MovieService = ApiClient.getClient()
 

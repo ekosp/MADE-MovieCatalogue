@@ -11,8 +11,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.adapter.TabAdapter;
-import com.ekosp.dicoding.moviecatalogue.fragment.movielist.MovieListFragment;
 import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.fragment.movielist.MovieListFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;

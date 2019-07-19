@@ -3,7 +3,7 @@ package com.ekosp.dicoding.moviecatalogue.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -28,7 +28,7 @@ public class MovieListResponse implements Parcelable{
     private Integer totalPages;
     @SerializedName("results")
     @Expose
-    private List<Movie> results = null;
+    private List<NewMovie> results = null;
 
     protected MovieListResponse(Parcel in) {
         if (in.readByte() == 0) {
@@ -46,7 +46,7 @@ public class MovieListResponse implements Parcelable{
         } else {
             totalPages = in.readInt();
         }
-        results = in.createTypedArrayList(Movie.CREATOR);
+        results = in.createTypedArrayList(NewMovie.CREATOR);
     }
 
     @Override
@@ -113,11 +113,11 @@ public class MovieListResponse implements Parcelable{
         this.totalPages = totalPages;
     }
 
-    public List<Movie> getResults() {
+    public List<NewMovie> getResults() {
         return results;
     }
 
-    public void setResults(List<Movie> results) {
+    public void setResults(List<NewMovie> results) {
         this.results = results;
     }
 

@@ -15,10 +15,10 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
-import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
-import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewTvShow;
+import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 
 import at.grabner.circleprogress.CircleProgressView;
 import butterknife.BindView;
@@ -49,10 +49,10 @@ public class TvshowDetailFragment extends BaseFragment {
     private Handler handler = new Handler();
     private Boolean isBookMarked = false;
     private DbRepository dbRepository;
-    private Tvshow tvshow;
+    private NewTvShow tvshow;
     private final String TAG = TvshowListFragment.class.getSimpleName();
 
-    public static TvshowDetailFragment newInstance(Tvshow tvshow) {
+    public static TvshowDetailFragment newInstance(NewTvShow tvshow) {
         TvshowDetailFragment myFragment = new TvshowDetailFragment();
 
         Bundle args = new Bundle();
@@ -91,15 +91,7 @@ public class TvshowDetailFragment extends BaseFragment {
             if (!isBookMarked) {
                 // new, save to favorite
                 Log.e(TAG, "save tvshow with id: " + tvshow.getId());
-                long result = dbRepository.insertTvshow(new com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow(
-                        tvshow.getId(),
-                        tvshow.getTitle(),
-                        tvshow.getOverview(),
-                        tvshow.getFirstAiringDate(),
-                        tvshow.getVoteAverage(),
-                        tvshow.getPosterPath(),
-                        tvshow.getBackdropPath()
-                ));
+                long result = dbRepository.insertTvshow(tvshow);
 
                 if (result > 1) {
                     isBookMarked = true;
@@ -130,16 +122,16 @@ public class TvshowDetailFragment extends BaseFragment {
     }
 
     void setTVshowDetail() {
-        movieTitle.setText(tvshow.getTitle());
-        releaseDate.setText(tvshow.getFirstAiringDate());
+        movieTitle.setText(tvshow.getName());
+        releaseDate.setText(tvshow.getFirst_air_date());
         movieOverview.setText(tvshow.getOverview());
 
         String coverUrl;
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             //Do some stuff
-            coverUrl = tvshow.getPosterPath();
+            coverUrl = tvshow.getPoster_path();
         } else {
-            coverUrl = tvshow.getBackdropPath();
+            coverUrl = tvshow.getBackdrop_path();
         }
 
         Glide.with(getActivity())
@@ -150,10 +142,10 @@ public class TvshowDetailFragment extends BaseFragment {
         fillScorePoint(tvshow);
     }
 
-    private void fillScorePoint(Tvshow show) {
+    private void fillScorePoint(NewTvShow show) {
         new Thread(() -> {
             // TODO Auto-generated method stub
-            while (pStatus < (show.getVoteAverage() * 10)) {
+            while (pStatus < (show.getVote_average() * 10)) {
                 pStatus += 1;
                 handler.post(() -> scoreView.setValue((float) pStatus));
                 try {

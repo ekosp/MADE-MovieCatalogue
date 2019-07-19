@@ -5,10 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.ekosp.dicoding.moviecatalogue.di.AppComponent;
-import com.ekosp.dicoding.moviecatalogue.di.AppModule;
-import com.ekosp.dicoding.moviecatalogue.di.DaggerAppComponent;
-import com.ekosp.dicoding.moviecatalogue.di.UtilsModule;
 import com.ekosp.dicoding.moviecatalogue.helper.DialogHelper;
 
 /**

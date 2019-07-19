@@ -2,7 +2,6 @@ package com.ekosp.dicoding.moviecatalogue.helper;
 
 import com.ekosp.dicoding.moviecatalogue.api.MovieService;
 import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
 import com.ekosp.dicoding.moviecatalogue.model.MovieListResponse;
 
 import io.reactivex.Observable;

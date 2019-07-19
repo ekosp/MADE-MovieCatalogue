@@ -1,15 +1,10 @@
 package com.ekosp.dicoding.moviecatalogue.fragment.movielist;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.ekosp.dicoding.moviecatalogue.api.ApiResponse;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
 import com.ekosp.dicoding.moviecatalogue.helper.Repository;
 import com.ekosp.dicoding.moviecatalogue.model.MovieListResponse;
-
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

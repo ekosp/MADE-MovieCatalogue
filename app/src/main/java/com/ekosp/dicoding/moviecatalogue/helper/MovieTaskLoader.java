@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.loader.content.AsyncTaskLoader;
 
 import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
 import com.ekosp.dicoding.moviecatalogue.model.MovieListResponse;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -23,11 +23,11 @@ import cz.msebera.android.httpclient.Header;
  * or contact me at ekosetyopurnomo@gmail.com
  */
 
-public class MovieTaskLoader extends AsyncTaskLoader<List<Movie>> {
+public class MovieTaskLoader extends AsyncTaskLoader<List<NewMovie>> {
 
-    private List<Movie> mData;
+    private List<NewMovie> mData;
     private boolean mHasResult = false;
-    private boolean mFavorite = false;
+    private boolean mFavorite;
     private DialogHelper dialogHelper;
     private DbRepository mRepository;
 
@@ -50,7 +50,7 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<Movie>> {
     }
 
     @Override
-    public void deliverResult(final List<Movie> data) {
+    public void deliverResult(final List<NewMovie> data) {
         mData = data;
         mHasResult = true;
         dialogHelper.dismissProgressDialog();
@@ -68,29 +68,30 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<Movie>> {
     }
 
     @Override
-    public List<Movie> loadInBackground() {
+    public List<NewMovie> loadInBackground() {
 
 
 
-         List<Movie> movieItemList = new ArrayList<>();
+        final List<NewMovie> movieItemList = new ArrayList<>();
         SyncHttpClient client = new SyncHttpClient();
         String MOVIE_URL = "https://api.themoviedb.org/3/discover/movie?api_key=" + GlobalVar.moviedb_apikey + "&language=en-US";
 
 
         if (mFavorite){
             // load fata from db
-            List<com.ekosp.dicoding.moviecatalogue.database.entity.Movie> list = mRepository.getAllMovie();
-            for (com.ekosp.dicoding.moviecatalogue.database.entity.Movie m: list){
-                Movie movie = new Movie();
-                movie.setId(m.getId());
-                movie.setTitle(m.getTitle());
-                movie.setReleaseDate(m.getReleaseDate());
-                movie.setOverview(m.getOverview());
-                movie.setVoteAverage(m.getVoteAverage());
-                movie.setPosterPath(m.getPosterPath());
-                movie.setBackdropPath(m.getBackdropPath());
-                movieItemList.add(movie);
-            }
+//            List<com.ekosp.dicoding.moviecatalogue.database.entity.Movie> list = mRepository.getAllMovie();
+//            for (com.ekosp.dicoding.moviecatalogue.database.entity.Movie m: list){
+//                Movie movie = new Movie();
+//                movie.setId(m.getId());
+//                movie.setTitle(m.getTitle());
+//                movie.setReleaseDate(m.getReleaseDate());
+//                movie.setOverview(m.getOverview());
+//                movie.setVoteAverage(m.getScore());
+//                movie.setPosterPath(m.getCoverUrl());
+//                movie.setBackdropPath(m.getBackdrop());
+//                movieItemList.add(movie);
+//            }
+            movieItemList.addAll(mRepository.getAllMovie());
 
         } else {
 

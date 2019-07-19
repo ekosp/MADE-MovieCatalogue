@@ -1,38 +1,29 @@
 package com.ekosp.dicoding.moviecatalogue.fragment.movielist;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ekosp.dicoding.moviecatalogue.MyApplication;
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.adapter.MoviesAdapter;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
-import com.ekosp.dicoding.moviecatalogue.helper.Constant;
+import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.helper.MovieTaskLoader;
-import com.ekosp.dicoding.moviecatalogue.helper.ViewModelFactory;
-import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
-import com.ekosp.dicoding.moviecatalogue.model.MovieListResponse;
-import com.google.gson.JsonElement;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,18 +34,10 @@ import butterknife.ButterKnife;
  * or contact me at ekosetyopurnomo@gmail.com
  */
 
-public class MovieListFragment extends BaseFragment {
+public class MovieListFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<List<NewMovie>> {
 
-    private List<Movie> movies = new ArrayList<>();
+    private List<NewMovie> movies = new ArrayList<>();
     private MoviesAdapter adapter;
-
-    @Inject
-    ViewModelFactory viewModelFactory;
-
-    @Inject
-    Context context;
-
-    MovieListViewModel viewModel;
 
     private static final int MOVIE_LOADER = 21;
 
@@ -72,44 +55,46 @@ public class MovieListFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        ((MyApplication) getActivity().getApplicationContext()).getAppComponent().doInjection(this);
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MovieListViewModel.class);
-
-        viewModel.movieResponse().observe(this, this::consumeResponse);
-
-    }
-
-    /*
-     * method to handle response
-     * */
-    private void consumeResponse(MovieListResponse response) {
-        adapter.setData(response.getResults());
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie_list, container, false);
         ButterKnife.bind(this, view);
 
-        adapter = new MoviesAdapter(movies, context);
-//        adapter.notifyDataSetChanged();
+        adapter = new MoviesAdapter(movies, getActivity());
+        adapter.notifyDataSetChanged();
 
         rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovies.setAdapter(adapter);
 
-
-        if (!Constant.checkInternetConnection(context)) {
-            Toast.makeText(context, getResources().getString(R.string.errorString), Toast.LENGTH_SHORT).show();
-        }
-        else
-        viewModel.hitMovieApi();
-
+        Objects.requireNonNull(getActivity()).getSupportLoaderManager().initLoader(MOVIE_LOADER, getArguments(), this);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getArguments() != null && getArguments().getBoolean(GlobalVar.PARAM_IS_FAVORITE))
+            Objects.requireNonNull(getActivity()).getSupportLoaderManager().restartLoader(MOVIE_LOADER, getArguments(), this);
+    }
+
+    @NonNull
+    @Override
+    public Loader<List<NewMovie>> onCreateLoader(int id, @Nullable Bundle args) {
+
+        boolean isFavorite = args != null && args.getBoolean(GlobalVar.PARAM_IS_FAVORITE);
+        return new MovieTaskLoader(getActivity(), isFavorite);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<List<NewMovie>> loader, List<NewMovie> data) {
+        adapter.setData(data);
+        dismissLoading();
+
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<List<NewMovie>> loader) {
+        adapter.setData(null);
     }
 
 }

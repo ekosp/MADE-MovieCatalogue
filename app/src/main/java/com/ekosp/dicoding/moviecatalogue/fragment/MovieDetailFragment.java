@@ -15,11 +15,10 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
-import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Movie;
-import com.ekosp.dicoding.moviecatalogue.fragment.movielist.MovieListFragment;
-import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
+import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 
 import at.grabner.circleprogress.CircleProgressView;
 import butterknife.BindView;
@@ -50,10 +49,10 @@ public class MovieDetailFragment extends BaseFragment {
     private Handler handler = new Handler();
     private Boolean isBookMarked = false;
     private DbRepository dbRepository;
-    private Movie movie;
-    private final String TAG = MovieListFragment.class.getSimpleName();
+    private NewMovie movie;
+    private final String TAG = MovieDetailFragment.class.getSimpleName();
 
-    public static MovieDetailFragment newInstance(Movie movie) {
+    public static MovieDetailFragment newInstance(NewMovie movie) {
         MovieDetailFragment myFragment = new MovieDetailFragment();
         Bundle args = new Bundle();
         args.putParcelable("movie", movie);
@@ -90,15 +89,7 @@ public class MovieDetailFragment extends BaseFragment {
             if (!isBookMarked) {
                 // new, save to favorite
                 Log.e(TAG, "save movie with id: " + movie.getId());
-                long result = dbRepository.insertMovie(new com.ekosp.dicoding.moviecatalogue.database.entity.Movie(
-                        movie.getId(),
-                        movie.getTitle(),
-                        movie.getOverview(),
-                        movie.getReleaseDate(),
-                        movie.getVoteAverage(),
-                        movie.getPosterPath(),
-                        movie.getBackdropPath()
-                ));
+                long result = dbRepository.insertMovie(movie);
 
                 if (result > 1) {
                     isBookMarked = true;
@@ -132,15 +123,15 @@ public class MovieDetailFragment extends BaseFragment {
     void setMovieDetail() {
 
         movieTitle.setText(movie.getTitle());
-        releaseDate.setText(movie.getReleaseDate());
+        releaseDate.setText(movie.getRelease_date());
         movieOverview.setText(movie.getOverview());
 
         String coverUrl;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             //Do some stuff
-            coverUrl = movie.getPosterPath();
+            coverUrl = movie.getPoster_path();
         } else {
-            coverUrl = movie.getBackdropPath();
+            coverUrl = movie.getBackdrop_path();
         }
 
         Glide.with(getActivity())
@@ -152,16 +143,16 @@ public class MovieDetailFragment extends BaseFragment {
 
     }
 
-    private void fillScorePoint(Movie movie) {
+    private void fillScorePoint(NewMovie movie) {
         new Thread(() -> {
             // TODO Auto-generated method stub
-            while (pStatus < (movie.getVoteAverage() * 10)) {
+            while (pStatus < (movie.getVote_average() * 10)) {
                 pStatus += 1;
                 handler.post(() -> scoreView.setValue((float) pStatus));
                 try {
                     // Sleep for 200 milliseconds.
                     // Just to display the progress slowly
-                    Thread.sleep(50); //thread will take approx 3 seconds to finish
+                    Thread.sleep(40); //thread will take approx 3 seconds to finish
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

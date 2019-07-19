@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
-import com.ekosp.dicoding.moviecatalogue.database.entity.Tvshow;
+import com.ekosp.dicoding.moviecatalogue.database.entity.NewTvShow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.view.DetailActivity;
 
@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 
 public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHolder> {
 
-    private List<Tvshow> tvshowList;
+    private List<NewTvShow> tvshowList;
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -53,26 +53,26 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHold
 
         }
 
-        void bind(Tvshow show) {
-            title.setText(show.getTitle());
+        void bind(NewTvShow show) {
+            title.setText(show.getName());
             description.setText(show.getOverview());
-            releaseDate.setText(show.getFirstAiringDate());
-            score.setValue(show.getVoteAverage() * 10);
+            releaseDate.setText(show.getFirst_air_date());
+            score.setValue(show.getVote_average() * 10);
 
             Glide.with(context)
-                    .load(GlobalVar.baseUrl_image98 + show.getPosterPath())
+                    .load(GlobalVar.baseUrl_image98 + show.getPoster_path())
                     .centerCrop()
                     .into(cover);
         }
     }
 
 
-    public TvshowAdapter(List<Tvshow> tvshowList, Context context) {
+    public TvshowAdapter(List<NewTvShow> tvshowList, Context context) {
         this.tvshowList = tvshowList;
         this.context = context;
     }
 
-    public void setData(List<Tvshow> items) {
+    public void setData(List<NewTvShow> items) {
         tvshowList.clear();
         tvshowList.addAll(items);
         notifyDataSetChanged();
@@ -89,7 +89,7 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Tvshow show = tvshowList.get(position);
+        NewTvShow show = tvshowList.get(position);
         holder.bind(show);
 
         holder.itemView.setOnClickListener(v -> {
