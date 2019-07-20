@@ -82,7 +82,4 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, getResources().getString(R.string.disable_back_btn), Toast.LENGTH_SHORT).show();
     }
 
-
-
-
 }

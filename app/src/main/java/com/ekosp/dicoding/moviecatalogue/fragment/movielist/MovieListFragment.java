@@ -34,21 +34,23 @@ import butterknife.ButterKnife;
  * or contact me at ekosetyopurnomo@gmail.com
  */
 
+
+@SuppressWarnings("deprecation")
 public class MovieListFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<List<NewMovie>> {
 
     private List<NewMovie> movies = new ArrayList<>();
     private MoviesAdapter adapter;
-
     private static final int MOVIE_LOADER = 21;
 
     @BindView(R.id.rv_movies)
     RecyclerView rvMovies;
 
-    public static MovieListFragment newInstance(Boolean isFavorite) {
+    public static MovieListFragment newInstance(@NonNull Boolean isFavorite) {
         MovieListFragment fragment = new MovieListFragment();
 
         Bundle args = new Bundle();
         args.putBoolean(GlobalVar.PARAM_IS_FAVORITE, isFavorite);
+        args.putString(GlobalVar.PARAM_SEARCH_QUERY, "");
         fragment.setArguments(args);
 
         return fragment;
@@ -81,20 +83,28 @@ public class MovieListFragment extends BaseFragment implements LoaderManager.Loa
     @Override
     public Loader<List<NewMovie>> onCreateLoader(int id, @Nullable Bundle args) {
 
-        boolean isFavorite = args != null && args.getBoolean(GlobalVar.PARAM_IS_FAVORITE);
-        return new MovieTaskLoader(getActivity(), isFavorite);
+        assert args != null;
+        boolean isFavorite = args.getBoolean(GlobalVar.PARAM_IS_FAVORITE);
+        String query = args.getString(GlobalVar.PARAM_SEARCH_QUERY);
+
+        return new MovieTaskLoader(getActivity(), isFavorite, query);
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<NewMovie>> loader, List<NewMovie> data) {
         adapter.setData(data);
         dismissLoading();
-
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<NewMovie>> loader) {
         adapter.setData(null);
+    }
+
+    public void doSearchMovie(String query){
+        Objects.requireNonNull(getArguments()).putString(GlobalVar.PARAM_SEARCH_QUERY, query);
+        Objects.requireNonNull(getActivity()).getSupportLoaderManager().restartLoader(MOVIE_LOADER, getArguments(), this);
+
     }
 
 }

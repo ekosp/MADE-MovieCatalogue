@@ -21,5 +21,6 @@ public class GlobalVar {
     public static final String TABEL_TVSHOW = "tbl_tvshow";
 
     public static final String PARAM_IS_FAVORITE = "param_is_favorite";
+    public static final String PARAM_SEARCH_QUERY = "param_search_query";
 
 }

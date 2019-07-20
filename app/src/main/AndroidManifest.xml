@@ -21,8 +21,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.DetailActivity" />
-        <activity android:name=".view.SearchActivity" />
-        <activity android:name=".view.Search2Activity" />
+        <activity android:name=".view.PreferenceActivity" />
+
+        <!-- Register the Alarm Receiver -->
+        <receiver android:name=".reminder.AlarmReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

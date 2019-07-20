@@ -2,11 +2,13 @@ package com.ekosp.dicoding.moviecatalogue.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
@@ -30,6 +32,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     Toolbar toolbar;
 
     private Boolean shouldAllowBack = false;
+    private SearchView mSearchView;
+//    private Fragment attachedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         // set default first opened fragment
         changeFragment(MovieListFragment.newInstance(false));
         setTitle(getResources().getString(R.string.movie_list));
-
     }
 
     void changeFragment(Fragment newFragment) {
@@ -58,11 +61,11 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         Fragment fragment = null;
         switch (menuItem.getItemId()) {
             case R.id.home_menu:
-                fragment =  MovieListFragment.newInstance(false);
+                fragment = MovieListFragment.newInstance(false);
                 setTitle(getResources().getString(R.string.movie_list));
                 break;
             case R.id.search_menu:
-                fragment =  TvshowListFragment.newInstance(false);
+                fragment = TvshowListFragment.newInstance(false);
                 setTitle(getResources().getString(R.string.tv_show_list));
                 break;
             case R.id.favorite_menu:
@@ -78,7 +81,24 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+
+        MenuItem mSearch = menu.findItem(R.id.searchMenu);
+        mSearchView = (SearchView) mSearch.getActionView();
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.length() > 2)
+                    doSearching(newText);
+                return true;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -86,23 +106,26 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         int id = item.getItemId();
 
         if (id == R.id.settings) {
-            Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            Intent mIntent = new Intent(this, PreferenceActivity.class);
             startActivity(mIntent);
             return true;
         }
 
         if (id == R.id.searchMenu) {
-            Intent mIntent = new Intent(this, Search2Activity.class);
-            startActivity(mIntent);
-            Toast.makeText(this, "search movie / tv show", Toast.LENGTH_SHORT).show();
+            Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            if (f instanceof MovieListFragment) {
+                mSearchView.setQueryHint(getResources().getString(R.string.search_movie));
+            } else if (f instanceof TvshowListFragment) {
+                mSearchView.setQueryHint(getResources().getString(R.string.search_tv_show));
+            }
+
             return true;
         }
-
 
         return super.onOptionsItemSelected(item);
     }
 
-    void setTitle(String s){
+    void setTitle(String s) {
         getSupportActionBar().setTitle(s);
     }
 
@@ -114,6 +137,15 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         } else {
             super.onBackPressed();
             finish();
+        }
+    }
+
+    void doSearching(String query) {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (f instanceof MovieListFragment) {
+            ((MovieListFragment) f).doSearchMovie(query);
+        } else if (f instanceof TvshowListFragment) {
+            ( (TvshowListFragment) f).doSearchMovie(query);
         }
     }
 }

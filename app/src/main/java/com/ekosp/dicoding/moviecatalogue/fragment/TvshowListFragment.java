@@ -21,6 +21,7 @@ import com.ekosp.dicoding.moviecatalogue.helper.TvshowTaskLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +32,7 @@ import butterknife.ButterKnife;
  * or contact me at ekosetyopurnomo@gmail.com
  */
 
+@SuppressWarnings("deprecation")
 public class TvshowListFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<List<NewTvShow>> {
 
     private List<NewTvShow> tvshows = new ArrayList<>();
@@ -46,6 +48,7 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
 
         Bundle args = new Bundle();
         args.putBoolean(GlobalVar.PARAM_IS_FAVORITE, isFavorite);
+        args.putString(GlobalVar.PARAM_SEARCH_QUERY, "");
         fragment.setArguments(args);
 
         return fragment;
@@ -62,7 +65,7 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
         rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovies.setAdapter(adapter);
 
-        getActivity().getSupportLoaderManager().initLoader(TVSHOW_LOADER, getArguments(), this);
+        Objects.requireNonNull(getActivity()).getSupportLoaderManager().initLoader(TVSHOW_LOADER, getArguments(), this);
 
         return view;
     }
@@ -70,8 +73,8 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     @Override
     public void onResume() {
         super.onResume();
-        if (getArguments().getBoolean(GlobalVar.PARAM_IS_FAVORITE))
-            getActivity().getSupportLoaderManager().restartLoader(TVSHOW_LOADER, getArguments(), this);
+        if (getArguments() != null &&  getArguments().getBoolean(GlobalVar.PARAM_IS_FAVORITE))
+            Objects.requireNonNull(getActivity()).getSupportLoaderManager().restartLoader(TVSHOW_LOADER, getArguments(), this);
 
     }
 
@@ -79,7 +82,9 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     @Override
     public Loader<List<NewTvShow>> onCreateLoader(int id, @Nullable Bundle args) {
         boolean isFavorite = args.getBoolean(GlobalVar.PARAM_IS_FAVORITE);
-        return new TvshowTaskLoader(getActivity(), isFavorite);
+        String query = args.getString(GlobalVar.PARAM_SEARCH_QUERY);
+
+        return new TvshowTaskLoader(getActivity(), isFavorite, query);
     }
 
     @Override
@@ -93,5 +98,10 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
         adapter.setData(null);
     }
 
+    public void doSearchMovie(String query){
+        Objects.requireNonNull(getArguments()).putString(GlobalVar.PARAM_SEARCH_QUERY, query);
+        Objects.requireNonNull(getActivity()).getSupportLoaderManager().restartLoader(TVSHOW_LOADER, getArguments(), this);
+
+    }
 
 }

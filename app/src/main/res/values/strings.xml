@@ -151,5 +151,14 @@
         <item>@drawable/poster_arrow</item>
     </array>
 
+    <string name="sett_reminder_header">Set Reminder</string>
+    <string name="sett_reminder_label">Remind Me</string>
+    <string name="sett_reminder_desc">We will remind you to make entiries of your expense</string>
+    <string name="sett_reminder_time_label">Set Reminder Time</string>
+    <string name="sett_reminder_time_content">8 : 00 PM</string>
+    <string name="notif_daily_reminder">we missing you, open app now?</string>
+    <string name="notif_dragon_ball_release">Dragon Ball has been release today</string>
+    <string name="search_movie">Search Movie ...</string>
+    <string name="search_tv_show">Search Tv Show ...</string>
 
 </resources>

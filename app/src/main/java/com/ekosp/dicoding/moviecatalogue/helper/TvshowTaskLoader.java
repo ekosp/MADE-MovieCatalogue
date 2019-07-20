@@ -30,12 +30,15 @@ public class TvshowTaskLoader extends AsyncTaskLoader<List<NewTvShow>> {
     private boolean mFavorite = false;
     private DialogHelper dialogHelper;
     private DbRepository mRepository;
+    private String stringQuery;
 
-    public TvshowTaskLoader(final Context context, final Boolean isFavorite) {
+
+    public TvshowTaskLoader(final Context context, final Boolean isFavorite, final String query) {
         super(context);
-        dialogHelper = new DialogHelper(context);
-        mRepository = new DbRepository(context);
-        mFavorite = isFavorite;
+        this.dialogHelper = new DialogHelper(context);
+        this.mRepository = new DbRepository(context);
+        this.mFavorite = isFavorite;
+        this.stringQuery = query;
         onContentChanged();
     }
 
@@ -71,13 +74,17 @@ public class TvshowTaskLoader extends AsyncTaskLoader<List<NewTvShow>> {
 
         SyncHttpClient client = new SyncHttpClient();
         final List<NewTvShow> tvshowItemList = new ArrayList<>();
-        String TVSHOW_URL = "https://api.themoviedb.org/3/discover/tv?api_key=" + GlobalVar.moviedb_apikey + "&language=en-US";
+
+
+        String TVSHOW_URL;
+        if (!stringQuery.isEmpty())
+            TVSHOW_URL = "https://api.themoviedb.org/3/search/tv?api_key=" +
+                    GlobalVar.moviedb_apikey + "&language=en-US&query=" + stringQuery;
+        else
+         TVSHOW_URL = "https://api.themoviedb.org/3/discover/tv?api_key=" + GlobalVar.moviedb_apikey + "&language=en-US";
 
         if (mFavorite) {
-            // load from db
-            List<NewTvShow> list = mRepository.getAllTvshow();
-            tvshowItemList.addAll(list);
-
+            tvshowItemList.addAll(mRepository.getAllTvshow());
         } else {
             client.get(TVSHOW_URL, new AsyncHttpResponseHandler() {
                 @Override

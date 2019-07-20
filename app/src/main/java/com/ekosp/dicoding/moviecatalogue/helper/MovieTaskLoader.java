@@ -28,15 +28,16 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<NewMovie>> {
     private List<NewMovie> mData;
     private boolean mHasResult = false;
     private boolean mFavorite;
+    private String stringQuery;
     private DialogHelper dialogHelper;
     private DbRepository mRepository;
 
-
-    public MovieTaskLoader(final Context context, final Boolean isFavorite) {
+    public MovieTaskLoader(final Context context, final Boolean isFavorite, final String query) {
         super(context);
-        dialogHelper = new DialogHelper(context);
-        mRepository = new DbRepository(context);
-        mFavorite = isFavorite;
+        this.dialogHelper = new DialogHelper(context);
+        this.mRepository = new DbRepository(context);
+        this.mFavorite = isFavorite;
+        this.stringQuery = query;
         onContentChanged();
     }
 
@@ -71,56 +72,48 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<NewMovie>> {
     public List<NewMovie> loadInBackground() {
 
 
-
         final List<NewMovie> movieItemList = new ArrayList<>();
         SyncHttpClient client = new SyncHttpClient();
-        String MOVIE_URL = "https://api.themoviedb.org/3/discover/movie?api_key=" + GlobalVar.moviedb_apikey + "&language=en-US";
 
+        String MOVIE_URL;
+        if (!stringQuery.isEmpty())
+            MOVIE_URL = "https://api.themoviedb.org/3/search/movie?api_key=" +
+                    GlobalVar.moviedb_apikey + "&language=en-US&query=" + stringQuery;
+        else
+            MOVIE_URL = "https://api.themoviedb.org/3/discover/movie?api_key=" +
+                    GlobalVar.moviedb_apikey + "&language=en-US";
 
-        if (mFavorite){
-            // load fata from db
-//            List<com.ekosp.dicoding.moviecatalogue.database.entity.Movie> list = mRepository.getAllMovie();
-//            for (com.ekosp.dicoding.moviecatalogue.database.entity.Movie m: list){
-//                Movie movie = new Movie();
-//                movie.setId(m.getId());
-//                movie.setTitle(m.getTitle());
-//                movie.setReleaseDate(m.getReleaseDate());
-//                movie.setOverview(m.getOverview());
-//                movie.setVoteAverage(m.getScore());
-//                movie.setPosterPath(m.getCoverUrl());
-//                movie.setBackdropPath(m.getBackdrop());
-//                movieItemList.add(movie);
-//            }
+        if (mFavorite) {
             movieItemList.addAll(mRepository.getAllMovie());
-
         } else {
 
-        client.get(MOVIE_URL, new AsyncHttpResponseHandler() {
-            @Override
-            public void onStart() {
-                super.onStart();
-                setUseSynchronousMode(true);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                try {
-                    String result = new String(responseBody);
-                    Gson gson = new Gson();
-                    MovieListResponse response = gson.fromJson(result, MovieListResponse.class);
-                    movieItemList.addAll(response.getResults());
-
-                } catch (Exception e) {
-                    //Jika terjadi error pada saat parsing maka akan masuk ke catch()
-                    e.printStackTrace();
+            client.get(MOVIE_URL, new AsyncHttpResponseHandler() {
+                @Override
+                public void onStart() {
+                    super.onStart();
+                    setUseSynchronousMode(true);
                 }
-            }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                //Jika response gagal maka , do nothing
-            }
-        }); }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    try {
+                        String result = new String(responseBody);
+                        Gson gson = new Gson();
+                        MovieListResponse response = gson.fromJson(result, MovieListResponse.class);
+                        movieItemList.addAll(response.getResults());
+
+                    } catch (Exception e) {
+                        //Jika terjadi error pada saat parsing maka akan masuk ke catch()
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    //Jika response gagal maka , do nothing
+                }
+            });
+        }
 
         return movieItemList;
     }
