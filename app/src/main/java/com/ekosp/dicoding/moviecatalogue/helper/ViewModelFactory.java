@@ -10,12 +10,14 @@ import com.ekosp.dicoding.moviecatalogue.fragment.movielist.MovieListViewModel;
 import javax.inject.Inject;
 
 /**
- * Created by ${Saquib} on 03-05-2018.
+ * Created by Eko.Purnomo on 2019-07-14.
+ * about me visit https://ekosp.com
+ * or contact me at ekosetyopurnomo@gmail.com
  */
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
-    private Repository repository;
+    private final Repository repository;
 
     @Inject
     public ViewModelFactory(Repository repository) {

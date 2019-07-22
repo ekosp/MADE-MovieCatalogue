@@ -1,9 +1,9 @@
 package com.ekosp.dicoding.moviecatalogue.view;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
-import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,29 +18,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.ekosp.dicoding.moviecatalogue.R;
-import com.ekosp.dicoding.moviecatalogue.reminder.AlarmReceiver;
-import com.ekosp.dicoding.moviecatalogue.reminder.DailyReminder;
-import com.ekosp.dicoding.moviecatalogue.reminder.LocalData;
-import com.ekosp.dicoding.moviecatalogue.reminder.ReleaseTodayReminder;
+import com.ekosp.dicoding.moviecatalogue.fitur.reminder.AlarmReceiver;
+import com.ekosp.dicoding.moviecatalogue.fitur.reminder.DailyReminder;
+import com.ekosp.dicoding.moviecatalogue.fitur.reminder.LocalData;
+import com.ekosp.dicoding.moviecatalogue.fitur.reminder.ReleaseTodayReminder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class PreferenceActivity extends AppCompatActivity {
 
-    String TAG = "RemindMe";
-    LocalData localData;
-
-    SwitchCompat reminderSwitch, returnAppSwitch;
-    TextView tvTime;
-
-    LinearLayout ll_set_time, ll_terms, ll_set_language;
-
-    int hour, min;
-
-    ClipboardManager myClipboard;
-
+    private final String TAG = "RemindMe";
+    private LocalData localData;
+    private TextView tvTime;
+    private LinearLayout ll_set_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +42,18 @@ public class PreferenceActivity extends AppCompatActivity {
 
         localData = new LocalData(getApplicationContext());
 
-        myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
-        ll_set_time = (LinearLayout) findViewById(R.id.ll_set_time);
-        ll_terms = (LinearLayout) findViewById(R.id.ll_terms);
-        ll_set_language = (LinearLayout) findViewById(R.id.ll_set_language);
+        ll_set_time = findViewById(R.id.ll_set_time);
+        LinearLayout ll_terms = findViewById(R.id.ll_terms);
+        LinearLayout ll_set_language = findViewById(R.id.ll_set_language);
 
-        tvTime = (TextView) findViewById(R.id.tv_reminder_time_desc);
+        tvTime = findViewById(R.id.tv_reminder_time_desc);
 
-        reminderSwitch = (SwitchCompat) findViewById(R.id.timerSwitch);
-        returnAppSwitch = (SwitchCompat) findViewById(R.id.returnAppSwitch);
+        SwitchCompat reminderSwitch = findViewById(R.id.timerSwitch);
+        SwitchCompat returnAppSwitch = findViewById(R.id.returnAppSwitch);
 
-        hour = localData.get_hour();
-        min = localData.get_min();
+        int hour = localData.get_hour();
+        int min = localData.get_min();
 
         tvTime.setText(getFormatedTime(hour, min));
 
@@ -116,7 +108,7 @@ public class PreferenceActivity extends AppCompatActivity {
 
     }
 
-
+    @SuppressLint("InflateParams")
     private void showTimePickerDialog(int h, int m) {
 
         LayoutInflater inflater = getLayoutInflater();
@@ -140,7 +132,7 @@ public class PreferenceActivity extends AppCompatActivity {
 
     }
 
-    public String getFormatedTime(int h, int m) {
+    private String getFormatedTime(int h, int m) {
         final String OLD_FORMAT = "HH:mm";
         final String NEW_FORMAT = "hh:mm a";
 
@@ -151,7 +143,7 @@ public class PreferenceActivity extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT, getCurrentLocale());
             Date d = sdf.parse(oldDateString);
             sdf.applyPattern(NEW_FORMAT);
-            newDateString = sdf.format(d);
+            newDateString = sdf.format(Objects.requireNonNull(d));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -160,7 +152,7 @@ public class PreferenceActivity extends AppCompatActivity {
     }
 
     @TargetApi(Build.VERSION_CODES.N)
-    public Locale getCurrentLocale() {
+    private Locale getCurrentLocale() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return getResources().getConfiguration().getLocales().get(0);
         } else {

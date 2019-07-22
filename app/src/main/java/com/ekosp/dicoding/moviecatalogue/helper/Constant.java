@@ -1,20 +1,11 @@
 package com.ekosp.dicoding.moviecatalogue.helper;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 
-public class Constant {
-
-    public static ProgressDialog getProgressDialog(Context context, String msg) {
-        ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage(msg);
-        progressDialog.setCancelable(false);
-        return progressDialog;
-    }
-
+class Constant {
 
     public static boolean checkInternetConnection(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context

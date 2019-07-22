@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar
 
+
 /**
  * Created by Eko.Purnomo on 2019-07-17.
  * about me visit https://ekosp.com
@@ -28,6 +29,7 @@ data class NewMovie(
         val release_date: String?
 
 ) : Parcelable {
+
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readInt(),

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.adapter.MoviesAdapter;
-import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.view.base.BaseFragment;
 import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.helper.MovieTaskLoader;
@@ -38,7 +38,7 @@ import butterknife.ButterKnife;
 @SuppressWarnings("deprecation")
 public class MovieListFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<List<NewMovie>> {
 
-    private List<NewMovie> movies = new ArrayList<>();
+    private final List<NewMovie> movies = new ArrayList<>();
     private MoviesAdapter adapter;
     private static final int MOVIE_LOADER = 21;
 

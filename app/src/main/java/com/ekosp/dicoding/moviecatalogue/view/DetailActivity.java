@@ -58,7 +58,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    void changeFragment(Fragment newFragment) {
+    private void changeFragment(Fragment newFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
         transaction.addToBackStack(null);

@@ -1,7 +1,5 @@
 package com.ekosp.dicoding.moviecatalogue.di;
 
-
-
 import com.ekosp.dicoding.moviecatalogue.fragment.movielist.MovieListFragment;
 
 import javax.inject.Singleton;

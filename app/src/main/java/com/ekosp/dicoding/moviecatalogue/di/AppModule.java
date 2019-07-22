@@ -8,12 +8,14 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by ${Saquib} on 03-05-2018.
+ * Created by Eko.Purnomo on 2019-07-14.
+ * about me visit https://ekosp.com
+ * or contact me at ekosetyopurnomo@gmail.com
  */
 
 @Module
 public class AppModule {
-    private Context context;
+    private final Context context;
 
     public AppModule(Context context) {
         this.context = context;

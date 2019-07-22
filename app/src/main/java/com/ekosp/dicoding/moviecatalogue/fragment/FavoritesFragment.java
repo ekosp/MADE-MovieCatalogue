@@ -11,9 +11,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.adapter.TabAdapter;
-import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.view.base.BaseFragment;
 import com.ekosp.dicoding.moviecatalogue.fragment.movielist.MovieListFragment;
 import com.google.android.material.tabs.TabLayout;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +35,7 @@ public class FavoritesFragment extends BaseFragment {
     TabLayout tabLayout;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
-    private int[] tabIcons = {
+    private final int[] tabIcons = {
             R.drawable.ic_local_movies_white_24dp,
             R.drawable.ic_live_tv_white_24dp
     };
@@ -46,11 +50,11 @@ public class FavoritesFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         ButterKnife.bind(this, view);
 
-        adapter = new TabAdapter(getActivity().getSupportFragmentManager(), mContext);
+        adapter = new TabAdapter(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), mContext);
         adapter.addFragment(MovieListFragment.newInstance(true), getResources().getString(R.string.movies), tabIcons[0]);
         adapter.addFragment(TvshowListFragment.newInstance(true), getResources().getString(R.string.tv_shows), tabIcons[1]);
 

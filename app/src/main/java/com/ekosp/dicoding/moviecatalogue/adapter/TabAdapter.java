@@ -1,11 +1,6 @@
 package com.ekosp.dicoding.moviecatalogue.adapter;
 
-/**
- * Created by Eko.Purnomo on 2019-06-23.
- * about me visit https://ekosp.com
- * or contact me at ekosetyopurnomo@gmail.com
- */
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
@@ -24,12 +19,19 @@ import com.ekosp.dicoding.moviecatalogue.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Eko.Purnomo on 2019-06-23.
+ * about me visit https://ekosp.com
+ * or contact me at ekosetyopurnomo@gmail.com
+ */
+
+@SuppressLint("InflateParams")
 public class TabAdapter extends FragmentStatePagerAdapter {
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
     private final List<Integer> mFragmentIconList = new ArrayList<>();
-    private Context context;
+    private final Context context;
 
     public TabAdapter(FragmentManager fm, Context context) {
         super(fm);

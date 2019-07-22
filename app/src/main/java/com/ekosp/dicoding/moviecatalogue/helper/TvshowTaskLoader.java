@@ -27,10 +27,10 @@ public class TvshowTaskLoader extends AsyncTaskLoader<List<NewTvShow>> {
 
     private List<NewTvShow> mData;
     private boolean mHasResult = false;
-    private boolean mFavorite = false;
-    private DialogHelper dialogHelper;
-    private DbRepository mRepository;
-    private String stringQuery;
+    private boolean mFavorite;
+    private final DialogHelper dialogHelper;
+    private final DbRepository mRepository;
+    private final String stringQuery;
 
 
     public TvshowTaskLoader(final Context context, final Boolean isFavorite, final String query) {

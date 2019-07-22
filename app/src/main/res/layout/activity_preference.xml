@@ -135,7 +135,8 @@
                     android:layout_height="@dimen/timer_icon"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_timer" />
+                    android:src="@drawable/ic_timer"
+                    android:contentDescription="TODO" />
 
             </RelativeLayout>
 

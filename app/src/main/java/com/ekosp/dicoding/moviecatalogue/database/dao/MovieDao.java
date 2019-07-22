@@ -1,5 +1,7 @@
 package com.ekosp.dicoding.moviecatalogue.database.dao;
 
+import android.database.Cursor;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -28,7 +30,13 @@ public interface MovieDao {
     @Query("SELECT * FROM "+ GlobalVar.TABEL_MOVIE+" WHERE id= :id")
     int getMovieById (Integer id);
 
+    @Query("SELECT * FROM "+ GlobalVar.TABEL_MOVIE+" WHERE id= :id")
+    Cursor getMovieById (long id);
+
     @Query("SELECT * from " + GlobalVar.TABEL_MOVIE)
     List<NewMovie> getAllMovie();
+
+    @Query("SELECT * from " + GlobalVar.TABEL_MOVIE)
+    Cursor getAllCursorMovie();
 
 }

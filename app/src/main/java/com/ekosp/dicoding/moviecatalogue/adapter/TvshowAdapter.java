@@ -16,6 +16,8 @@ import com.ekosp.dicoding.moviecatalogue.database.entity.NewTvShow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.view.DetailActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import at.grabner.circleprogress.CircleProgressView;
@@ -30,10 +32,10 @@ import butterknife.ButterKnife;
 
 public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHolder> {
 
-    private List<NewTvShow> tvshowList;
-    private Context context;
+    private final List<NewTvShow> tvshowList;
+    private final Context context;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.img_photo)
         ImageView cover;
@@ -73,14 +75,17 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHold
     }
 
     public void setData(List<NewTvShow> items) {
-        tvshowList.clear();
-        tvshowList.addAll(items);
-        notifyDataSetChanged();
+        if (items != null) {
+            tvshowList.clear();
+            tvshowList.addAll(items);
+            notifyDataSetChanged();
+        }
     }
 
 
+    @NotNull
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_movie, parent, false);
 
@@ -88,7 +93,7 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull MyViewHolder holder, int position) {
         NewTvShow show = tvshowList.get(position);
         holder.bind(show);
 

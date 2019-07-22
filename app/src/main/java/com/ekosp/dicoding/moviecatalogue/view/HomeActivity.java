@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.graphics.Movie;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -20,6 +18,10 @@ import com.ekosp.dicoding.moviecatalogue.fragment.FavoritesFragment;
 import com.ekosp.dicoding.moviecatalogue.fragment.movielist.MovieListFragment;
 import com.ekosp.dicoding.moviecatalogue.fragment.TvshowListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +35,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     private Boolean shouldAllowBack = false;
     private SearchView mSearchView;
-//    private Fragment attachedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         setTitle(getResources().getString(R.string.movie_list));
     }
 
-    void changeFragment(Fragment newFragment) {
+    private void changeFragment(Fragment newFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
         transaction.addToBackStack(null);
@@ -102,7 +103,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.settings) {
@@ -125,8 +126,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         return super.onOptionsItemSelected(item);
     }
 
-    void setTitle(String s) {
-        getSupportActionBar().setTitle(s);
+    private void setTitle(String s) {
+        Objects.requireNonNull(getSupportActionBar()).setTitle(s);
     }
 
     @Override
@@ -140,7 +141,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         }
     }
 
-    void doSearching(String query) {
+    private void doSearching(String query) {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (f instanceof MovieListFragment) {
             ((MovieListFragment) f).doSearchMovie(query);

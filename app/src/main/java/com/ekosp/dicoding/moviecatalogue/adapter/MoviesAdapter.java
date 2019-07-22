@@ -16,6 +16,8 @@ import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.view.DetailActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import at.grabner.circleprogress.CircleProgressView;
@@ -30,8 +32,8 @@ import butterknife.ButterKnife;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder> {
 
-    private List<NewMovie> moviesList;
-    private Context context;
+    private final List<NewMovie> moviesList;
+    private final Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -77,8 +79,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         notifyDataSetChanged();
     }
 
+    @NotNull
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_movie, parent, false);
 
@@ -86,7 +89,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull MyViewHolder holder, int position) {
         NewMovie movie = moviesList.get(position);
         holder.bind(movie);
 

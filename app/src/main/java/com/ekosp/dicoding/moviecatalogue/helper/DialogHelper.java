@@ -18,21 +18,20 @@ import com.rey.material.app.Dialog;
 public class DialogHelper {
 
     private static Context ctx;
-    static View loadingView;
-    static Dialog loadingDialog;
+    private static View loadingView;
+    private static Dialog loadingDialog;
 
     public DialogHelper(Context context) {
-        this.ctx = context;
+        ctx = context;
     }
 
-    public boolean initProgressDialog() {
+    public void initProgressDialog() {
         loadingView = LayoutInflater.from(ctx).inflate(R.layout.dialog_progress, null);
         loadingDialog = new Dialog(ctx);
         loadingDialog.backgroundColor(Color.parseColor("#ffffff"));
         loadingDialog.elevation(0);
         loadingDialog.setCancelable(false);
         loadingDialog.setContentView(loadingView);
-        return true;
     }
 
     public void showProgressDialog() {

@@ -15,10 +15,14 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.ekosp.dicoding.moviecatalogue.R;
-import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.view.base.BaseFragment;
 import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
 import com.ekosp.dicoding.moviecatalogue.database.entity.NewTvShow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import at.grabner.circleprogress.CircleProgressView;
 import butterknife.BindView;
@@ -45,8 +49,8 @@ public class TvshowDetailFragment extends BaseFragment {
     @BindView(R.id.action_favorite)
     ImageView actionFavorite;
 
-    int pStatus = 0;
-    private Handler handler = new Handler();
+    private int pStatus = 0;
+    private final Handler handler = new Handler();
     private Boolean isBookMarked = false;
     private DbRepository dbRepository;
     private NewTvShow tvshow;
@@ -69,11 +73,11 @@ public class TvshowDetailFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
         ButterKnife.bind(this, view);
 
-        tvshow = getArguments().getParcelable("tvshow");
+        tvshow = Objects.requireNonNull(getArguments()).getParcelable("tvshow");
         setTVshowDetail();
         setAction();
 
@@ -113,7 +117,7 @@ public class TvshowDetailFragment extends BaseFragment {
         });
     }
 
-    void setActionFavoriteIcon() {
+    private void setActionFavoriteIcon() {
         if (isBookMarked)
             actionFavorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_white_24dp));
         else
@@ -121,7 +125,7 @@ public class TvshowDetailFragment extends BaseFragment {
 
     }
 
-    void setTVshowDetail() {
+    private void setTVshowDetail() {
         movieTitle.setText(tvshow.getName());
         releaseDate.setText(tvshow.getFirst_air_date());
         movieOverview.setText(tvshow.getOverview());
@@ -134,7 +138,7 @@ public class TvshowDetailFragment extends BaseFragment {
             coverUrl = tvshow.getBackdrop_path();
         }
 
-        Glide.with(getActivity())
+        Glide.with(Objects.requireNonNull(getActivity()))
                 .load(GlobalVar.baseUrl_image500+coverUrl)
                 .centerCrop()
                 .into(movieCover);

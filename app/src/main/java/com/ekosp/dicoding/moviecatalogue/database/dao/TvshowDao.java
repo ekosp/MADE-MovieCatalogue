@@ -1,5 +1,7 @@
 package com.ekosp.dicoding.moviecatalogue.database.dao;
 
+import android.database.Cursor;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -28,8 +30,15 @@ public interface TvshowDao {
     @Query("SELECT * FROM "+ GlobalVar.TABEL_TVSHOW+" WHERE id= :id")
     int getTvshowById (Integer id);
 
+    @Query("SELECT * FROM "+ GlobalVar.TABEL_TVSHOW+" WHERE id= :id")
+    Cursor getTvshowById (long id);
+
     @Query("SELECT * from " + GlobalVar.TABEL_TVSHOW)
     List<NewTvShow> getAllTvshow();
+
+    @Query("SELECT * from " + GlobalVar.TABEL_TVSHOW)
+    Cursor getAllCursorTvshow();
+
 
 
 }

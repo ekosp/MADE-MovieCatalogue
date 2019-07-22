@@ -27,10 +27,10 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<NewMovie>> {
 
     private List<NewMovie> mData;
     private boolean mHasResult = false;
-    private boolean mFavorite;
-    private String stringQuery;
-    private DialogHelper dialogHelper;
-    private DbRepository mRepository;
+    private final boolean mFavorite;
+    private final String stringQuery;
+    private final DialogHelper dialogHelper;
+    private final DbRepository mRepository;
 
     public MovieTaskLoader(final Context context, final Boolean isFavorite, final String query) {
         super(context);

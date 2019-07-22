@@ -9,12 +9,14 @@ import com.ekosp.dicoding.moviecatalogue.di.DaggerAppComponent;
 import com.ekosp.dicoding.moviecatalogue.di.UtilsModule;
 
 /**
- * Created by ${Saquib} on 03-05-2018.
+ * Created by Eko.Purnomo on 2019-07-14.
+ * about me visit https://ekosp.com
+ * or contact me at ekosetyopurnomo@gmail.com
  */
 
 public class MyApplication extends Application {
-    AppComponent appComponent;
-    Context context;
+    private AppComponent appComponent;
+     private Context context;
 
     @Override
     public void onCreate() {

@@ -27,9 +27,9 @@ public class TvshowListResponse implements Parcelable {
     private Integer totalPages;
     @SerializedName("results")
     @Expose
-    private List<NewTvShow> results = null;
+    private List<NewTvShow> results;
 
-    protected TvshowListResponse(Parcel in) {
+    private TvshowListResponse(Parcel in) {
         if (in.readByte() == 0) {
             page = null;
         } else {
@@ -88,35 +88,8 @@ public class TvshowListResponse implements Parcelable {
         }
     };
 
-    public Integer getPage() {
-        return page;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    public Integer getTotalResults() {
-        return totalResults;
-    }
-
-    public void setTotalResults(Integer totalResults) {
-        this.totalResults = totalResults;
-    }
-
-    public Integer getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(Integer totalPages) {
-        this.totalPages = totalPages;
-    }
-
     public List<NewTvShow> getResults() {
         return results;
     }
 
-    public void setResults(List<NewTvShow> results) {
-        this.results = results;
-    }
 }

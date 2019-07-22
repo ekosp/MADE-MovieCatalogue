@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.adapter.TvshowAdapter;
-import com.ekosp.dicoding.moviecatalogue.base.BaseFragment;
+import com.ekosp.dicoding.moviecatalogue.view.base.BaseFragment;
 import com.ekosp.dicoding.moviecatalogue.database.entity.NewTvShow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.helper.TvshowTaskLoader;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,7 @@ import butterknife.ButterKnife;
 @SuppressWarnings("deprecation")
 public class TvshowListFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<List<NewTvShow>> {
 
-    private List<NewTvShow> tvshows = new ArrayList<>();
+    private final List<NewTvShow> tvshows = new ArrayList<>();
     private TvshowAdapter adapter;
 
     private static final int TVSHOW_LOADER = 51;
@@ -55,7 +57,7 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie_list, container, false);
         ButterKnife.bind(this, view);
 
@@ -81,7 +83,7 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     @NonNull
     @Override
     public Loader<List<NewTvShow>> onCreateLoader(int id, @Nullable Bundle args) {
-        boolean isFavorite = args.getBoolean(GlobalVar.PARAM_IS_FAVORITE);
+        boolean isFavorite = Objects.requireNonNull(args).getBoolean(GlobalVar.PARAM_IS_FAVORITE);
         String query = args.getString(GlobalVar.PARAM_SEARCH_QUERY);
 
         return new TvshowTaskLoader(getActivity(), isFavorite, query);

@@ -29,7 +29,8 @@
               android:id="@+id/img_cover"
               android:scaleType="centerInside"
               android:layout_width="match_parent"
-              android:layout_height="250dp"  />
+              android:layout_height="250dp"
+              android:contentDescription="TODO" />
 
           <TextView
               android:layout_marginStart="16dp"
@@ -119,7 +120,8 @@
                       android:src="@drawable/ic_format_list_bulleted_white_24dp"
                       android:background="@drawable/circle_with_border"
                       android:layout_width="@dimen/medium_circle_action"
-                      android:layout_height="@dimen/medium_circle_action" />
+                      android:layout_height="@dimen/medium_circle_action"
+                      android:contentDescription="TODO" />
 
                   <ImageView
                       android:layout_gravity="center_vertical"
@@ -128,7 +130,8 @@
                       android:src="@drawable/ic_heart_white"
                       android:background="@drawable/circle_with_border"
                       android:layout_width="@dimen/medium_circle_action"
-                      android:layout_height="@dimen/medium_circle_action" />
+                      android:layout_height="@dimen/medium_circle_action"
+                      android:contentDescription="TODO" />
 
                   <ImageView
                       android:id="@+id/action_favorite"
@@ -138,7 +141,8 @@
                       android:src="@drawable/ic_bookmark_border_black_24dp"
                       android:background="@drawable/circle_with_border"
                       android:layout_width="@dimen/medium_circle_action"
-                      android:layout_height="@dimen/medium_circle_action" />
+                      android:layout_height="@dimen/medium_circle_action"
+                      android:contentDescription="TODO" />
 
                   <ImageView
                       android:layout_gravity="center_vertical"
@@ -147,7 +151,8 @@
                       android:src="@drawable/ic_grade_white_24dp"
                       android:background="@drawable/circle_with_border"
                       android:layout_width="@dimen/medium_circle_action"
-                      android:layout_height="@dimen/medium_circle_action" />
+                      android:layout_height="@dimen/medium_circle_action"
+                      android:contentDescription="TODO" />
 
 
               </LinearLayout>

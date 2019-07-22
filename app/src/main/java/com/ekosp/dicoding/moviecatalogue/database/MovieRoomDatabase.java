@@ -19,15 +19,15 @@ import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
  */
 
 @Database(entities = {NewMovie.class, NewTvShow.class}, version = 4, exportSchema = false)
-abstract class MovieRoomDatabase extends RoomDatabase {
+public abstract class MovieRoomDatabase extends RoomDatabase {
 
-    abstract MovieDao movieDao();
+    public abstract MovieDao movieDao();
 
-    abstract TvshowDao tvshowDao();
+    public abstract TvshowDao tvshowDao();
 
     private static MovieRoomDatabase INSTANCE;
 
-    static MovieRoomDatabase getDatabase(Context context) {
+    public static synchronized MovieRoomDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             synchronized (MovieRoomDatabase.class) {
                 if (INSTANCE == null) {
@@ -41,9 +41,5 @@ abstract class MovieRoomDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
-
-//    public static void destroyInstance() {
-//        INSTANCE = null;
-//    }
 
 }

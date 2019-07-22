@@ -15,7 +15,7 @@ import java.util.List;
  * or contact me at ekosetyopurnomo@gmail.com
  */
 
-public class MovieListResponse implements Parcelable{
+public class MovieListResponse implements Parcelable {
 
     @SerializedName("page")
     @Expose
@@ -28,9 +28,9 @@ public class MovieListResponse implements Parcelable{
     private Integer totalPages;
     @SerializedName("results")
     @Expose
-    private List<NewMovie> results = null;
+    private List<NewMovie> results;
 
-    protected MovieListResponse(Parcel in) {
+    private MovieListResponse(Parcel in) {
         if (in.readByte() == 0) {
             page = null;
         } else {
@@ -89,37 +89,8 @@ public class MovieListResponse implements Parcelable{
         }
     };
 
-    public Integer getPage() {
-        return page;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    public Integer getTotalResults() {
-        return totalResults;
-    }
-
-    public void setTotalResults(Integer totalResults) {
-        this.totalResults = totalResults;
-    }
-
-    public Integer getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(Integer totalPages) {
-        this.totalPages = totalPages;
-    }
-
     public List<NewMovie> getResults() {
         return results;
     }
 
-    public void setResults(List<NewMovie> results) {
-        this.results = results;
-    }
-
-
-    }
+}
