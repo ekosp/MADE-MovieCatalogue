@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ekosp.dicoding.moviecatalogue" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -7,6 +8,7 @@
     <permission android:name="com.example.android.contentprovidersample.provider.READ_WRITE"/>
 
     <application
+        android:fullBackupContent="true"
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/movie_db_icon"
@@ -15,32 +17,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <service
-            android:name=".fitur.widget.StackWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-        <receiver android:name=".fitur.widget.ImagesBannerWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/image_banner_widget_info" />
-        </receiver>
-
-        <activity android:name=".view.HomeActivity">
+        <activity android:name=".view.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.DetailActivity" />
-        <activity android:name=".view.PreferenceActivity" /> <!-- Register the Alarm Receiver -->
+        <activity android:name=".view.activity.DetailActivity" />
+        <activity android:name=".view.activity.PreferenceActivity" /> <!-- Register the Alarm Receiver -->
+
 
         <receiver
-            android:name=".fitur.reminder.AlarmReceiver"
+            android:name=".feature.reminder.DailyAlarmReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".feature.reminder.ReleaseTodayAlarmReceiver"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -48,10 +45,26 @@
         </receiver>
 
         <provider
-            android:name=".fitur.provider.ItemContentProvider"
-            android:authorities="com.ekosp.dicoding.moviecatalogue.fitur.provider.ItemContentProvider"
+            android:name=".feature.provider.ItemContentProvider"
+            android:authorities="com.ekosp.dicoding.moviecatalogue.feature.provider.ItemContentProvider"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
+
+        <receiver android:name=".feature.widget.FavoriteWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favorite_widget_info" />
+        </receiver>
+
+
+        <service
+            android:name=".feature.widget.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
     </application>
 

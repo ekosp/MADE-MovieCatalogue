@@ -1,6 +1,7 @@
 package com.ekosp.dicoding.moviecatalogue.di;
 
-import com.ekosp.dicoding.moviecatalogue.fragment.movielist.MovieListFragment;
+import com.ekosp.dicoding.moviecatalogue.feature.reminder.ReleaseTodayAlarmReceiver;
+import com.ekosp.dicoding.moviecatalogue.view.fragment.MovieListFragment;
 
 import javax.inject.Singleton;
 
@@ -10,6 +11,8 @@ import dagger.Component;
 @Singleton
 public interface AppComponent {
 
-    void doInjection(MovieListFragment movieListFragment);
+    void doInject(MovieListFragment movieListFragment);
+
+    void doInject(ReleaseTodayAlarmReceiver alarmReceiver);
 
 }

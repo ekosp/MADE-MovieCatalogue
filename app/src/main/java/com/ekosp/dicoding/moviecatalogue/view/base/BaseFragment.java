@@ -39,14 +39,13 @@ public class BaseFragment extends Fragment {
         getDialogHelper().dismissProgressDialog();
     }
 
+    protected void showLoading() {
+        getDialogHelper().showProgressDialog();
+    }
+
 //    protected AppComponent getAppComponent() {
 //        return appComponent;
 //    }
-
-//    void inject(Fragment fragment){
-//        appComponent.doInjection(fragment);
-//    }
-
 
 
 }

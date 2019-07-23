@@ -1,0 +1,54 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/movie_poster"
+        android:layout_width="200dp"
+        android:src="@drawable/starwars"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/todo" />
+
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/tv_movie_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Small"
+        android:maxLines="1"
+        android:textColor="@android:color/white"
+        tools:text="Title"/>
+
+    <!--<at.grabner.circleprogress.CircleProgressView-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--android:background="@drawable/ic_lens_black_24dp"-->
+        <!--android:id="@+id/scoreView"-->
+        <!--android:layout_width="48dp"-->
+        <!--android:layout_height="48dp"-->
+        <!--CircleProgressView:cpv_autoTextSize="true"-->
+        <!--CircleProgressView:cpv_barColor="#21D07A"-->
+        <!--CircleProgressView:cpv_barWidth="5dp"-->
+        <!--CircleProgressView:cpv_innerContourSize="0dp"-->
+        <!--CircleProgressView:cpv_maxValue="100"-->
+        <!--CircleProgressView:cpv_outerContourSize="3dp"-->
+        <!--CircleProgressView:cpv_rimColor="#204529"-->
+        <!--CircleProgressView:cpv_rimWidth="6dp"-->
+        <!--CircleProgressView:cpv_showUnit="true"-->
+        <!--CircleProgressView:cpv_spinColor="@color/primary"-->
+        <!--CircleProgressView:cpv_textColor="@color/icons"-->
+        <!--CircleProgressView:cpv_textScale="1"-->
+        <!--CircleProgressView:cpv_unit="%"-->
+        <!--CircleProgressView:cpv_unitColor="@color/icons"-->
+        <!--CircleProgressView:cpv_unitPosition="right_top"-->
+        <!--CircleProgressView:cpv_unitScale="1"-->
+        <!--CircleProgressView:cpv_value="48" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

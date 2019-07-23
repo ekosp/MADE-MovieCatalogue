@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Filem Favorit</string>
+
+    <string name="more_info">Info Lengkap</string>
+    <string name="user_score">Score\nPengguna</string>
+    <string name="overview">Ikhtisar</string>
+    <string name="movies">Filem</string>
+    <string name="tv_shows">Acara TV</string>
+    <string name="detail_info">Informasi Lengkap</string>
+    <string name="loading_info">Mohon Tunggu …</string>
+    <string name="menu_settings">Pengaturan</string>
+    <string name="tabimageview">tabImageView</string>
+    <string name="dummy_movie_date">November 21, 2018</string>
+    <string name="dummy_movie_overview">Investigative journalist Eddie Brock attempts a comeback following a scandal, but accidentally becomes the host of Venom, a violent, super powerful alien symbiote. Soon, he must rely on his newfound powers to protect the world from a shadowy organization looking for a symbiote of their own.</string>
+    <string name="dummy_movie_title">Venom</string>
+    <string name="favorite_list_empty">Favorit masih kosong</string>
+    <string name="todo">TODO</string>
+
+</resources>

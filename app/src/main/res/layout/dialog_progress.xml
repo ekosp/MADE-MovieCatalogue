@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:theme="@style/DialogTheme">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:gravity="center">
@@ -14,7 +15,6 @@
             android:id="@+id/progressview_circular"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             app:pv_autostart="true"
             app:pv_circular="true"
@@ -24,15 +24,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/progressview_circular"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="12dp"
-            android:layout_centerHorizontal="true"
             android:text="@string/loading_info"
             android:textStyle="bold"
             android:textColor="@color/green_forest"
             android:textSize="20dp"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

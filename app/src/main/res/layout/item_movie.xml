@@ -30,7 +30,7 @@
               android:src="@drawable/poster_venom"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintStart_toStartOf="parent"
-              android:contentDescription="TODO" />
+              android:contentDescription="@string/todo" />
 
           <androidx.constraintlayout.widget.ConstraintLayout
               android:id="@+id/score_container"
@@ -109,14 +109,12 @@
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toEndOf="@id/img_photo"
               app:layout_constraintTop_toBottomOf="@id/txt_description"
-              android:id="@+id/separator"
               android:background="@color/divider"
               android:layout_width="0dp"
               android:layout_height="1dp"/>
 
           <TextView
               android:layout_marginTop="8dp"
-              android:id="@+id/textView"
               android:layout_width="0dp"
               android:textStyle="bold"
               android:layout_height="wrap_content"

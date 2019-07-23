@@ -1,5 +1,6 @@
 package com.ekosp.dicoding.moviecatalogue.helper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -18,15 +19,15 @@ import com.rey.material.app.Dialog;
 public class DialogHelper {
 
     private static Context ctx;
-    private static View loadingView;
     private static Dialog loadingDialog;
 
     public DialogHelper(Context context) {
         ctx = context;
     }
 
+    @SuppressLint("InflateParams")
     public void initProgressDialog() {
-        loadingView = LayoutInflater.from(ctx).inflate(R.layout.dialog_progress, null);
+        View loadingView = LayoutInflater.from(ctx).inflate(R.layout.dialog_progress, null);
         loadingDialog = new Dialog(ctx);
         loadingDialog.backgroundColor(Color.parseColor("#ffffff"));
         loadingDialog.elevation(0);

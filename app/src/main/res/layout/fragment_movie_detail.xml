@@ -7,7 +7,7 @@
     android:background="#1F282D"
     xmlns:CircleProgressView="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".view.DetailActivity">
+    tools:context=".view.activity.DetailActivity">
 
     <ScrollView
       app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
               android:scaleType="centerInside"
               android:layout_width="match_parent"
               android:layout_height="250dp"
-              android:contentDescription="TODO" />
+              android:contentDescription="@string/todo" />
 
           <TextView
               android:layout_marginStart="16dp"
@@ -121,7 +121,7 @@
                       android:background="@drawable/circle_with_border"
                       android:layout_width="@dimen/medium_circle_action"
                       android:layout_height="@dimen/medium_circle_action"
-                      android:contentDescription="TODO" />
+                      android:contentDescription="@string/todo" />
 
                   <ImageView
                       android:layout_gravity="center_vertical"
@@ -131,7 +131,7 @@
                       android:background="@drawable/circle_with_border"
                       android:layout_width="@dimen/medium_circle_action"
                       android:layout_height="@dimen/medium_circle_action"
-                      android:contentDescription="TODO" />
+                      android:contentDescription="@string/todo" />
 
                   <ImageView
                       android:id="@+id/action_favorite"
@@ -142,7 +142,8 @@
                       android:background="@drawable/circle_with_border"
                       android:layout_width="@dimen/medium_circle_action"
                       android:layout_height="@dimen/medium_circle_action"
-                      android:contentDescription="TODO" />
+                      android:contentDescription="@string/todo"
+                      tools:ignore="InconsistentLayout" />
 
                   <ImageView
                       android:layout_gravity="center_vertical"
@@ -152,7 +153,7 @@
                       android:background="@drawable/circle_with_border"
                       android:layout_width="@dimen/medium_circle_action"
                       android:layout_height="@dimen/medium_circle_action"
-                      android:contentDescription="TODO" />
+                      android:contentDescription="@string/todo" />
 
 
               </LinearLayout>

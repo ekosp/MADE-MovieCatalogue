@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
+import com.ekosp.dicoding.moviecatalogue.model.Movie;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
 public interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(NewMovie movie);
+    long insert(Movie movie);
 
     @Query("DELETE FROM " + GlobalVar.TABEL_MOVIE+" WHERE id= :id")
     int deleteMovieById(Integer id);
@@ -34,7 +34,7 @@ public interface MovieDao {
     Cursor getMovieById (long id);
 
     @Query("SELECT * from " + GlobalVar.TABEL_MOVIE)
-    List<NewMovie> getAllMovie();
+    List<Movie> getAllMovie();
 
     @Query("SELECT * from " + GlobalVar.TABEL_MOVIE)
     Cursor getAllCursorMovie();

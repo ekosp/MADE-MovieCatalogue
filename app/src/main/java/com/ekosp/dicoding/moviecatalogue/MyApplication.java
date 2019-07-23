@@ -16,12 +16,11 @@ import com.ekosp.dicoding.moviecatalogue.di.UtilsModule;
 
 public class MyApplication extends Application {
     private AppComponent appComponent;
-     private Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        context = this;
+        Context context = this;
         appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).utilsModule(new UtilsModule()).build();
     }
 

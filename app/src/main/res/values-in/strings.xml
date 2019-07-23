@@ -19,14 +19,15 @@
     <string name="disable_back_btn">Tombol back dinonaktifkan</string>
     <string name="exit_confirm">Tekan sekali lagi untuk keluar apps</string>
 
-    <string name="appwidget_text">BANNER STAR WARS</string>
-    <string name="empty_text">NO DATA</string>
     <string name="notif_daily_reminder">kami rindu anda, buka app sekarang?</string>
-    <string name="notif_dragon_ball_release">Dragon Ball rilis hari ini</string>
     <string name="search_movie">Cari filem ...</string>
     <string name="search_tv_show">Cari Tayangan Tv ...</string>
     <string name="sett_reminder_header">Atur Pengingat</string>
     <string name="sett_reminder_time_content">20 : 00</string>
     <string name="sett_reminder_time_label">Atur Waktu Pengingat</string>
+    <string name="favorite_list_empty">Daftar masih kosong</string>
+    <string name="empty_widget_view_text">Tidak Ada Filem Favorit</string>
+    <string name="list_favorite">Daftar Favorit</string>
+    <string name="upcoming_reminder_msg">Hi, hari ini %s rilis</string>
 
 </resources>

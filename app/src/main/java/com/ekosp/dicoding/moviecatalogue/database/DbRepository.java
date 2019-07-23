@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.ekosp.dicoding.moviecatalogue.database.dao.MovieDao;
 import com.ekosp.dicoding.moviecatalogue.database.dao.TvshowDao;
-import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
-import com.ekosp.dicoding.moviecatalogue.database.entity.NewTvShow;
+import com.ekosp.dicoding.moviecatalogue.model.Movie;
+import com.ekosp.dicoding.moviecatalogue.model.TvShow;
 
 import java.util.List;
 
@@ -29,11 +29,11 @@ public class DbRepository {
     }
 
 
-    public Long insertMovie(NewMovie movie) {
+    public Long insertMovie(Movie movie) {
         return mMovieiDao.insert(movie);
     }
 
-    public List<NewMovie> getAllMovie() {
+    public List<Movie> getAllMovie() {
         return mMovieiDao.getAllMovie();
     }
 
@@ -51,11 +51,11 @@ public class DbRepository {
         return mMovieiDao.deleteMovieById(id);
     }
 
-    public Long insertTvshow(NewTvShow tv) {
+    public Long insertTvshow(TvShow tv) {
         return mTvshowDao.insert(tv);
     }
 
-    public List<NewTvShow> getAllTvshow() {
+    public List<TvShow> getAllTvshow() {
         return mTvshowDao.getAllTvshow();
     }
 

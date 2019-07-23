@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Movie Favorite</string>
+    <string name="more_info">More Info</string>
+    <string name="user_score">User\nScore</string>
+    <string name="overview">Overview</string>
+    <string name="movies">Movies</string>
+    <string name="tv_shows">TV Show</string>
+    <string name="detail_info">Detail Info</string>
+    <string name="loading_info">Please Wait ...</string>
+    <string name="menu_settings">Settings</string>
+    <string name="tabimageview">tabImageView</string>
+    <string name="dummy_movie_title">Venom</string>
+    <string name="dummy_movie_date">November 21, 2018</string>
+    <string name="dummy_movie_overview">Investigative journalist Eddie Brock attempts a comeback following a scandal, but accidentally becomes the host of Venom, a violent, super powerful alien symbiote. Soon, he must rely on his newfound powers to protect the world from a shadowy organization looking for a symbiote of their own.</string>
+    <string name="favorite_list_empty">Favorite still empty</string>
+    <string name="todo">TODO</string>
+
+
+</resources>

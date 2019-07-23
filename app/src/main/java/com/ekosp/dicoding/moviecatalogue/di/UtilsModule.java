@@ -4,10 +4,10 @@ import android.content.Context;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import com.ekosp.dicoding.moviecatalogue.api.MovieService;
 import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
-import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.helper.Repository;
+import com.ekosp.dicoding.moviecatalogue.network.ApiClient;
+import com.ekosp.dicoding.moviecatalogue.network.MovieService;
 import com.ekosp.dicoding.moviecatalogue.helper.ViewModelFactory;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -21,9 +21,8 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+//import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
 
 /**
  * Created by Eko.Purnomo on 2019-07-14.
@@ -44,20 +43,8 @@ public class UtilsModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
-
-        return new Retrofit.Builder()
-                .baseUrl(GlobalVar.baseUrl)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-    }
-
-    @Provides
-    @Singleton
-    MovieService getApiCallInterface(Retrofit retrofit) {
-        return retrofit.create(MovieService.class);
+    MovieService getApiCallInterface() {
+        return ApiClient.Companion.getClient();
     }
 
     @Provides

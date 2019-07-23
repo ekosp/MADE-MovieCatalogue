@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+
+    <color name="primary">#2196F3</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="yellow">#FFFF00</color>
+
+    <color name="green_forest">#009E61</color>
+
+</resources>

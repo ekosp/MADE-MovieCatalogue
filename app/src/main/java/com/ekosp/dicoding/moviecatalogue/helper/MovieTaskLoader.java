@@ -5,16 +5,14 @@ import android.content.Context;
 import androidx.loader.content.AsyncTaskLoader;
 
 import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
-import com.ekosp.dicoding.moviecatalogue.database.entity.NewMovie;
-import com.ekosp.dicoding.moviecatalogue.model.MovieListResponse;
-import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.SyncHttpClient;
+import com.ekosp.dicoding.moviecatalogue.model.Movie;
+import com.ekosp.dicoding.moviecatalogue.network.ApiClient;
+import com.ekosp.dicoding.moviecatalogue.network.MovieService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import cz.msebera.android.httpclient.Header;
+import java.util.Objects;
 
 
 /**
@@ -23,18 +21,16 @@ import cz.msebera.android.httpclient.Header;
  * or contact me at ekosetyopurnomo@gmail.com
  */
 
-public class MovieTaskLoader extends AsyncTaskLoader<List<NewMovie>> {
+public class MovieTaskLoader extends AsyncTaskLoader<List<Movie>> {
 
-    private List<NewMovie> mData;
+    private List<Movie> mData;
     private boolean mHasResult = false;
     private final boolean mFavorite;
     private final String stringQuery;
-    private final DialogHelper dialogHelper;
     private final DbRepository mRepository;
 
     public MovieTaskLoader(final Context context, final Boolean isFavorite, final String query) {
         super(context);
-        this.dialogHelper = new DialogHelper(context);
         this.mRepository = new DbRepository(context);
         this.mFavorite = isFavorite;
         this.stringQuery = query;
@@ -45,16 +41,14 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<NewMovie>> {
     protected void onStartLoading() {
         if (takeContentChanged()) {
             forceLoad();
-            dialogHelper.showProgressDialog();
         } else if (mHasResult)
             deliverResult(mData);
     }
 
     @Override
-    public void deliverResult(final List<NewMovie> data) {
+    public void deliverResult(final List<Movie> data) {
         mData = data;
         mHasResult = true;
-        dialogHelper.dismissProgressDialog();
         super.deliverResult(data);
     }
 
@@ -69,50 +63,25 @@ public class MovieTaskLoader extends AsyncTaskLoader<List<NewMovie>> {
     }
 
     @Override
-    public List<NewMovie> loadInBackground() {
+    public List<Movie> loadInBackground() {
 
-
-        final List<NewMovie> movieItemList = new ArrayList<>();
-        SyncHttpClient client = new SyncHttpClient();
-
-        String MOVIE_URL;
-        if (!stringQuery.isEmpty())
-            MOVIE_URL = "https://api.themoviedb.org/3/search/movie?api_key=" +
-                    GlobalVar.moviedb_apikey + "&language=en-US&query=" + stringQuery;
-        else
-            MOVIE_URL = "https://api.themoviedb.org/3/discover/movie?api_key=" +
-                    GlobalVar.moviedb_apikey + "&language=en-US";
+        final List<Movie> movieItemList = new ArrayList<>();
+        final MovieService service = ApiClient.Companion.getClient();
 
         if (mFavorite) {
             movieItemList.addAll(mRepository.getAllMovie());
         } else {
+            try {
+                if (!stringQuery.isEmpty()){ // if search
+                    movieItemList.addAll(Objects.requireNonNull(service.searchMovies(stringQuery).execute().body()).getResults());
 
-            client.get(MOVIE_URL, new AsyncHttpResponseHandler() {
-                @Override
-                public void onStart() {
-                    super.onStart();
-                    setUseSynchronousMode(true);
+                } else { // normal discovery
+                    movieItemList.addAll(Objects.requireNonNull(service.getPopularMovies().execute().body()).getResults());
                 }
 
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    try {
-                        String result = new String(responseBody);
-                        Gson gson = new Gson();
-                        MovieListResponse response = gson.fromJson(result, MovieListResponse.class);
-                        movieItemList.addAll(response.getResults());
-
-                    } catch (Exception e) {
-                        //Jika terjadi error pada saat parsing maka akan masuk ke catch()
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    //Jika response gagal maka , do nothing
-                }
-            });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return movieItemList;

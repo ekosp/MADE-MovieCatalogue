@@ -1,10 +1,8 @@
 package com.ekosp.dicoding.moviecatalogue.helper;
 
-import com.ekosp.dicoding.moviecatalogue.api.MovieService;
+import com.ekosp.dicoding.moviecatalogue.network.MovieService;
 import com.ekosp.dicoding.moviecatalogue.database.DbRepository;
-import com.ekosp.dicoding.moviecatalogue.model.MovieListResponse;
 
-import io.reactivex.Observable;
 
 /**
  * Created by Eko.Purnomo on 2019-07-14.
@@ -14,18 +12,25 @@ import io.reactivex.Observable;
 
 public class Repository {
 
-    private final MovieService movieService;
-
     public Repository(MovieService movieService, DbRepository dbRepository) {
-        this.movieService = movieService;
+        MovieService movieService1 = movieService;
         DbRepository dbRepository1 = dbRepository;
     }
 
-    /*
-     * method to call login api
-     * */
-    public Observable<MovieListResponse> executeLogin() {
-        return movieService.getPopularMovies(GlobalVar.moviedb_apikey);
-    }
+//    List<NewMovie> getMovies(){
+//        Call<MovieListResponse> call = movieService.getPopularMovies().e;
+//        call.enqueue(new Callback<MovieListResponse>() {
+//            @Override
+//            public void onResponse(Call<MovieListResponse> call, Response<MovieListResponse> response) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MovieListResponse> call, Throwable t) {
+//
+//            }
+//
+//        });
+//    }
 
 }

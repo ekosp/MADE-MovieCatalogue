@@ -12,6 +12,7 @@
     <string name="movie_list">Movie List</string>
     <string name="tv_show_list">TV Show List</string>
     <string name="favorites_list">Favorites List</string>
+    <string name="list_favorite">List Favorite</string>
     <string name="favorite">Favorite</string>
     <string name="tv_show">TV Show</string>
     <string name="movie">Movie</string>
@@ -22,12 +23,14 @@
     <string name="sett_reminder_time_label">Set Reminder Time</string>
     <string name="sett_reminder_time_content">8 : 00 PM</string>
     <string name="notif_daily_reminder">we missing you, open app now?</string>
-    <string name="notif_dragon_ball_release">Dragon Ball has been release today</string>
     <string name="search_movie">Search Movie …</string>
     <string name="search_tv_show">Search Tv Show …</string>
 
-    <string name="appwidget_text">STAR WARS BANNER</string>
-    <string name="empty_text">NO DATA</string>
+    <string name="favorite_list_empty">List still empty</string>
+    <string name="empty_widget_view_text">No Movies Added</string>
+    <string name="upcoming_reminder_msg" >Hi, today %s is release  </string>
+    <string name="todo">TODO</string>
+    <string name="remind_me">Remind Me @</string>
 
 
 </resources>

@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.ekosp.dicoding.moviecatalogue.database.entity.NewTvShow;
+import com.ekosp.dicoding.moviecatalogue.model.TvShow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
 public interface TvshowDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(NewTvShow tvshow);
+    long insert(TvShow tvshow);
 
     @Query("DELETE FROM " + GlobalVar.TABEL_TVSHOW+" WHERE id= :id")
     int deleteTvshowById(Integer id);
@@ -34,7 +34,7 @@ public interface TvshowDao {
     Cursor getTvshowById (long id);
 
     @Query("SELECT * from " + GlobalVar.TABEL_TVSHOW)
-    List<NewTvShow> getAllTvshow();
+    List<TvShow> getAllTvshow();
 
     @Query("SELECT * from " + GlobalVar.TABEL_TVSHOW)
     Cursor getAllCursorTvshow();
