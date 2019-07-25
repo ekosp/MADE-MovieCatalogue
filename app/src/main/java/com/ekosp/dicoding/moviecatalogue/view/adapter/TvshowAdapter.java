@@ -62,7 +62,7 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.MyViewHold
             score.setValue(show.getVote_average() * 10);
 
             Glide.with(context)
-                    .load(GlobalVar.baseUrl_image98 + show.getPoster_path())
+                    .load(GlobalVar.baseUrl_image185 + show.getPoster_path())
                     .centerCrop()
                     .into(cover);
         }

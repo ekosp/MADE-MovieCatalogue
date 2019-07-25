@@ -23,18 +23,21 @@ import java.util.concurrent.ExecutionException;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by izadalab on 16/02/18.
+ * Created by Eko S.P on 24/07/2019.
+ * email : ekosetyopurnomo@gmail.com
+ * about me : http://ekosp.com
  */
 
 class FavoriteStackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
-
     private final Context context;
     private Cursor cursor;
+    private int mAppWidgetId;
+
 
     public FavoriteStackRemoteViewsFactory(Context context, Intent intent) {
         this.context = context;
-        int mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+         mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
 
     }
@@ -78,7 +81,6 @@ class FavoriteStackRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
         }
 
         Movie movie = getItem(position);
-
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.movie_grid_item);
 
         Bitmap bmp = null;
@@ -86,14 +88,14 @@ class FavoriteStackRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
 
             bmp = Glide.with(context)
                     .asBitmap()
-                    .load(GlobalVar.baseUrl_image98 + movie.getBackdrop_path())
+                    .load(GlobalVar.baseUrl_image185 + movie.getPoster_path())
                     .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get();
 
         } catch (InterruptedException | ExecutionException e) {
             Log.d("Widget Load Error", "error");
         }
 
-        Log.e(TAG, "getViewAt: " + movie.getTitle());
+        Log.e(TAG, "getViewAt: " + movie.getPoster_path());
 
         rv.setImageViewBitmap(R.id.movie_poster, bmp);
         rv.setTextViewText(R.id.tv_movie_title, movie.getTitle());

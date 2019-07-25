@@ -62,7 +62,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
             score.setValue(movie.getVote_average() * 10);
 
             Glide.with(context)
-                    .load(GlobalVar.baseUrl_image98 + movie.getPoster_path())
+                    .load(GlobalVar.baseUrl_image185 + movie.getPoster_path())
                     .centerCrop()
                     .into(cover);
         }

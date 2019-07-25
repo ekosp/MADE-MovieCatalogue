@@ -26,29 +26,4 @@
         android:textColor="@android:color/white"
         tools:text="Title"/>
 
-    <!--<at.grabner.circleprogress.CircleProgressView-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--android:background="@drawable/ic_lens_black_24dp"-->
-        <!--android:id="@+id/scoreView"-->
-        <!--android:layout_width="48dp"-->
-        <!--android:layout_height="48dp"-->
-        <!--CircleProgressView:cpv_autoTextSize="true"-->
-        <!--CircleProgressView:cpv_barColor="#21D07A"-->
-        <!--CircleProgressView:cpv_barWidth="5dp"-->
-        <!--CircleProgressView:cpv_innerContourSize="0dp"-->
-        <!--CircleProgressView:cpv_maxValue="100"-->
-        <!--CircleProgressView:cpv_outerContourSize="3dp"-->
-        <!--CircleProgressView:cpv_rimColor="#204529"-->
-        <!--CircleProgressView:cpv_rimWidth="6dp"-->
-        <!--CircleProgressView:cpv_showUnit="true"-->
-        <!--CircleProgressView:cpv_spinColor="@color/primary"-->
-        <!--CircleProgressView:cpv_textColor="@color/icons"-->
-        <!--CircleProgressView:cpv_textScale="1"-->
-        <!--CircleProgressView:cpv_unit="%"-->
-        <!--CircleProgressView:cpv_unitColor="@color/icons"-->
-        <!--CircleProgressView:cpv_unitPosition="right_top"-->
-        <!--CircleProgressView:cpv_unitScale="1"-->
-        <!--CircleProgressView:cpv_value="48" />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

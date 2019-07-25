@@ -11,8 +11,8 @@ public class GlobalVar {
     public static final String baseUrl = "https://api.themoviedb.org/3/";
     public static final String moviedb_apikey = "bb195639ecca084bef68a2a343b0d443";
 
-    public static final String baseUrl_image98 = "https://image.tmdb.org/t/p/w185/";
-    public static final String baseUrl_image500 = "https://image.tmdb.org/t/p/w500/";
+    public static final String baseUrl_image185 = "https://image.tmdb.org/t/p/w185";
+    public static final String baseUrl_image500 = "https://image.tmdb.org/t/p/w500";
 
     public static final String DB_NAME = "db_movie";
     public static final String TABEL_MOVIE = "tbl_movie";

@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.widget.RemoteViewsService;
 
 /**
- * Created by izadalab on 16/02/18.
+ * Created by Eko S.P on 24/07/2019.
+ * email : ekosetyopurnomo@gmail.com
+ * about me : http://ekosp.com
  */
 
 public class StackWidgetService extends RemoteViewsService {

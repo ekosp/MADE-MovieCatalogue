@@ -28,7 +28,6 @@ public class DbRepository {
         mTvshowDao = db.tvshowDao();
     }
 
-
     public Long insertMovie(Movie movie) {
         return mMovieiDao.insert(movie);
     }
@@ -36,12 +35,6 @@ public class DbRepository {
     public List<Movie> getAllMovie() {
         return mMovieiDao.getAllMovie();
     }
-
-// --Commented out by Inspection START (2019-07-22 14:09):
-//    public Cursor getAllCursorMovie(){
-//        return mMovieiDao.getAllCursorMovie();
-//    }
-// --Commented out by Inspection STOP (2019-07-22 14:09)
 
     public Integer getMoviewById(Integer id) {
         return mMovieiDao.getMovieById(id);
@@ -58,10 +51,6 @@ public class DbRepository {
     public List<TvShow> getAllTvshow() {
         return mTvshowDao.getAllTvshow();
     }
-
-//    public Cursor getAllCursorTvshow(){
-//        return mTvshowDao.getAllCursorTvshow();
-//    }
 
     public Integer getTvshowById(Integer id) {
         return mTvshowDao.getTvshowById(id);
