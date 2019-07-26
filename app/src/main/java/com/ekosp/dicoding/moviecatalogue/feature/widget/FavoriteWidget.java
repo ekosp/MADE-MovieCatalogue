@@ -12,10 +12,11 @@ import com.ekosp.dicoding.moviecatalogue.R;
 /**
  * Implementation of App Widget functionality.
  */
+
 public class FavoriteWidget extends AppWidgetProvider {
 
-    private static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                        int appWidgetId) {
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                                int appWidgetId) {
 
         Intent intent = new Intent(context, StackWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);

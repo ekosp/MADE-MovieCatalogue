@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Binder;
 import android.util.Log;
 import android.widget.AdapterView;
@@ -28,16 +29,16 @@ import static android.content.ContentValues.TAG;
  * about me : http://ekosp.com
  */
 
-class FavoriteStackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+public class FavoriteStackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
-    private final Context context;
-    private Cursor cursor;
+
+    private Context context;
     private int mAppWidgetId;
-
+    private Cursor cursor;
 
     public FavoriteStackRemoteViewsFactory(Context context, Intent intent) {
         this.context = context;
-         mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+        mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
 
     }
@@ -81,6 +82,7 @@ class FavoriteStackRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
         }
 
         Movie movie = getItem(position);
+
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.movie_grid_item);
 
         Bitmap bmp = null;
@@ -89,13 +91,14 @@ class FavoriteStackRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
             bmp = Glide.with(context)
                     .asBitmap()
                     .load(GlobalVar.baseUrl_image185 + movie.getPoster_path())
+                    .error(new ColorDrawable(context.getResources().getColor(R.color.colorPrimary)))
                     .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get();
 
         } catch (InterruptedException | ExecutionException e) {
             Log.d("Widget Load Error", "error");
         }
 
-        Log.e(TAG, "getViewAt: " + movie.getPoster_path());
+        Log.e(TAG, "getViewAt: " + movie.getTitle());
 
         rv.setImageViewBitmap(R.id.movie_poster, bmp);
         rv.setTextViewText(R.id.tv_movie_title, movie.getTitle());

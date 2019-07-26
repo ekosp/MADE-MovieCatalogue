@@ -9,11 +9,15 @@ import android.widget.RemoteViewsService;
  * about me : http://ekosp.com
  */
 
-public class StackWidgetService extends RemoteViewsService {
+public class StackWidgetService extends RemoteViewsService  {
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new FavoriteStackRemoteViewsFactory(this.getApplicationContext(), intent);
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 }

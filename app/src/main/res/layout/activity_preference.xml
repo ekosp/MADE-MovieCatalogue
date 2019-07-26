@@ -8,7 +8,7 @@
 
         <TextView
             style="@style/settings_header"
-            android:text="Set Language" />
+            android:text="@string/set_language" />
 
         <LinearLayout
             android:id="@+id/ll_set_language"
@@ -24,7 +24,7 @@
 
                 <TextView
                     style="@style/settings_sub_header"
-                    android:text="Change Language" />
+                    android:text="@string/change_language" />
 
             </RelativeLayout>
 
@@ -33,7 +33,7 @@
                 style="@style/settings_details"
                 android:paddingTop="@dimen/items_top_padding"
                 android:paddingBottom="@dimen/items_inbetween_space"
-                android:text="Click to change your preferable language"/>
+                android:text="@string/change_your_language"/>
 
         </LinearLayout>
 
@@ -52,7 +52,7 @@
 
             <TextView
                 style="@style/settings_sub_header"
-                android:text="Daily Reminder" />
+                android:text="@string/daily_reminder" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/returnAppSwitch"
@@ -70,7 +70,7 @@
             style="@style/settings_details"
             android:paddingTop="@dimen/items_top_padding"
             android:paddingBottom="@dimen/items_inbetween_space"
-            android:text="Remind me to return to app" />
+            android:text="@string/remind_me_to_return_to_app" />
 
 
         <RelativeLayout
@@ -80,7 +80,7 @@
 
             <TextView
                 style="@style/settings_sub_header"
-                android:text="Release Reminder" />
+                android:text="@string/release_reminder" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/timerSwitch"
@@ -98,7 +98,7 @@
             style="@style/settings_details"
             android:paddingTop="@dimen/items_top_padding"
             android:paddingBottom="@dimen/items_inbetween_space"
-            android:text="We will remind you what movie release today" />
+            android:text="@string/remind_release_today" />
 
         <LinearLayout
             android:id="@+id/ll_set_time"
@@ -150,7 +150,7 @@
         <TextView
             style="@style/settings_header"
             android:paddingBottom="@dimen/items_inbetween_space"
-            android:text="Agreement" />
+            android:text="@string/agreement" />
 
         <LinearLayout
             android:id="@+id/ll_terms"
@@ -161,7 +161,7 @@
 
             <TextView
                 style="@style/settings_sub_header"
-                android:text="Terms &amp; conditions" />
+                android:text="@string/terms_conditions" />
 
         </LinearLayout>
 
@@ -173,7 +173,7 @@
 
             <TextView
                 style="@style/settings_sub_header"
-                android:text="Privacy policy" />
+                android:text="@string/privacy_policy" />
 
         </LinearLayout>
 

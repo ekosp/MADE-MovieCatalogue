@@ -32,5 +32,19 @@
     <string name="todo">TODO</string>
     <string name="remind_me">Remind Me @</string>
 
+    <string name="dummy_movie_title">Venom</string>
+    <string name="dummy_movie_date">November 21, 2018</string>
+    <string name="dummy_movie_overview">Investigative journalist Eddie Brock attempts a comeback following a scandal, but accidentally becomes the host of Venom, a violent, super powerful alien symbiote. Soon, he must rely on his newfound powers to protect the world from a shadowy organization looking for a symbiote of their own.</string>
+    <string name="set_language">Set Language</string>
+    <string name="change_language">Change Language</string>
+    <string name="change_your_language">Click to change your preferable language</string>
+    <string name="daily_reminder">Daily Reminder</string>
+    <string name="remind_me_to_return_to_app">Remind me to return to app</string>
+    <string name="release_reminder">Release Reminder</string>
+    <string name="remind_release_today">We will remind you what movie release today</string>
+    <string name="agreement">Agreement</string>
+    <string name="terms_conditions"><![CDATA[Terms & conditions]]></string>
+    <string name="privacy_policy">Privacy policy</string>
+
 
 </resources>

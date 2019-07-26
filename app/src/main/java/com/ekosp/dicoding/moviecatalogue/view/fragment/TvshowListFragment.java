@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +45,8 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
 
     @BindView(R.id.rv_movies)
     RecyclerView rvMovies;
+    @BindView(R.id.ll_movie_list_empty)
+    LinearLayout ll_empty;
 
     public static TvshowListFragment newInstance(Boolean isFavorite) {
         TvshowListFragment fragment = new TvshowListFragment();
@@ -95,7 +98,13 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     @Override
     public void onLoadFinished(@NonNull Loader<List<TvShow>> loader, List<TvShow> data) {
         dismissLoading();
-        adapter.setData(data);
+
+        if (data.size() == 0){
+            ll_empty.setVisibility(View.VISIBLE);
+        } else {
+            ll_empty.setVisibility(View.GONE);
+            adapter.setData(data);
+        }
     }
 
     @Override

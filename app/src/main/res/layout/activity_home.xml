@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.HomeActivity">
 
-    <!--<androidx.appcompat.widget.Toolbar -->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--android:id="@+id/toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:gravity="center_vertical"-->
-        <!--app:layout_collapseMode="pin"-->
-        <!--app:layout_scrollFlags="scroll|enterAlways"-->
-        <!--app:theme="@style/MyToolbarTheme"-->
-        <!--app:title="@string/app_name" />-->
-
     <include
         android:id="@+id/toolbar"
         layout="@layout/app_bar" />
