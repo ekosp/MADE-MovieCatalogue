@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 /**
  * Created by Eko.Purnomo on 2019-06-26.
  * about me visit https://ekosp.com

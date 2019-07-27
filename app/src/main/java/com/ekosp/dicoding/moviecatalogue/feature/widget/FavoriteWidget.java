@@ -12,7 +12,6 @@ import com.ekosp.dicoding.moviecatalogue.R;
 /**
  * Implementation of App Widget functionality.
  */
-
 public class FavoriteWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,

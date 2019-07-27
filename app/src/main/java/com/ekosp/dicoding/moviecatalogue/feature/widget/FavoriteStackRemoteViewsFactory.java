@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Binder;
 import android.util.Log;
 import android.widget.AdapterView;
@@ -24,9 +23,9 @@ import java.util.concurrent.ExecutionException;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by Eko S.P on 24/07/2019.
- * email : ekosetyopurnomo@gmail.com
- * about me : http://ekosp.com
+ * Created by Eko.Purnomo on 2019-07-14.
+ * about me visit https://ekosp.com
+ * or contact me at ekosetyopurnomo@gmail.com
  */
 
 public class FavoriteStackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
@@ -90,15 +89,15 @@ public class FavoriteStackRemoteViewsFactory implements RemoteViewsService.Remot
 
             bmp = Glide.with(context)
                     .asBitmap()
-                    .load(GlobalVar.baseUrl_image185 + movie.getPoster_path())
-                    .error(new ColorDrawable(context.getResources().getColor(R.color.colorPrimary)))
+                    .load(GlobalVar.baseUrl_image185 + movie.getBackdrop_path())
+                    //.error(new ColorDrawable(context.getResources().getColor(R.color.colorPrimary)))
                     .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get();
 
         } catch (InterruptedException | ExecutionException e) {
             Log.d("Widget Load Error", "error");
         }
 
-        Log.e(TAG, "getViewAt: " + movie.getTitle());
+        Log.e(TAG, "getViewAt: " + movie.getPoster_path());
 
         rv.setImageViewBitmap(R.id.movie_poster, bmp);
         rv.setTextViewText(R.id.tv_movie_title, movie.getTitle());

@@ -15,7 +15,6 @@ import com.ekosp.dicoding.moviecatalogue.model.TvShow;
 import com.ekosp.dicoding.moviecatalogue.view.fragment.MovieDetailFragment;
 import com.ekosp.dicoding.moviecatalogue.view.fragment.TvshowDetailFragment;
 
-import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,7 +65,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
+    public boolean onOptionsItemSelected( MenuItem item) {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {

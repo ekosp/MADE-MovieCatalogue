@@ -55,8 +55,6 @@ public class ReleaseTodayAlarmReceiver extends BroadcastReceiver {
             public void onResponse(Call<UpcomingMovieListResponse> call, Response<UpcomingMovieListResponse> response) {
                 if (response.isSuccessful())
 
-//                    ReleaseTodayReminder.showReleaseNotification(context,response.body().getResults().get(0).getTitle());
-
                     for (Movie movie : response.body().getResults()) {
                         if (movie.getRelease_date().equals(currentDate)){
                             ReleaseTodayReminder.showReleaseNotification(context,movie.getTitle());
@@ -70,8 +68,6 @@ public class ReleaseTodayAlarmReceiver extends BroadcastReceiver {
             }
 
         });
-
-
 
     }
 }

@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.widget.RemoteViewsService;
 
 /**
- * Created by Eko S.P on 24/07/2019.
- * email : ekosetyopurnomo@gmail.com
- * about me : http://ekosp.com
+ * Created by Eko.Purnomo on 2019-07-14.
+ * about me visit https://ekosp.com
+ * or contact me at ekosetyopurnomo@gmail.com
  */
 
-public class StackWidgetService extends RemoteViewsService  {
+public class StackWidgetService extends RemoteViewsService {
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {

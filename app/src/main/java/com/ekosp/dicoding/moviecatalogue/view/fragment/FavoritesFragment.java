@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
@@ -13,8 +14,6 @@ import com.ekosp.dicoding.moviecatalogue.R;
 import com.ekosp.dicoding.moviecatalogue.view.adapter.TabAdapter;
 import com.ekosp.dicoding.moviecatalogue.view.base.BaseFragment;
 import com.google.android.material.tabs.TabLayout;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -49,7 +48,7 @@ public class FavoritesFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         ButterKnife.bind(this, view);
 

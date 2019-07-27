@@ -19,8 +19,6 @@ import com.ekosp.dicoding.moviecatalogue.view.fragment.MovieListFragment;
 import com.ekosp.dicoding.moviecatalogue.view.fragment.TvshowListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -35,6 +33,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     private Boolean shouldAllowBack = false;
     private SearchView mSearchView;
+    private Integer lastSelectedtab = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +63,17 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.home_menu:
                 fragment = MovieListFragment.newInstance(false);
                 setTitle(getResources().getString(R.string.movie_list));
+                lastSelectedtab = 0;
                 break;
-            case R.id.search_menu:
+            case R.id.tv_menu:
                 fragment = TvshowListFragment.newInstance(false);
                 setTitle(getResources().getString(R.string.tv_show_list));
+                lastSelectedtab = 1;
                 break;
             case R.id.favorite_menu:
                 fragment = new FavoritesFragment();
                 setTitle(getResources().getString(R.string.favorites_list));
+                lastSelectedtab = 2;
                 break;
         }
 
@@ -103,7 +105,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.settings) {
@@ -146,7 +148,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         if (f instanceof MovieListFragment) {
             ((MovieListFragment) f).doSearchMovie(query);
         } else if (f instanceof TvshowListFragment) {
-            ( (TvshowListFragment) f).doSearchMovie(query);
+            ((TvshowListFragment) f).doSearchMovie(query);
         }
     }
 }

@@ -20,8 +20,6 @@ import com.ekosp.dicoding.moviecatalogue.model.TvShow;
 import com.ekosp.dicoding.moviecatalogue.helper.GlobalVar;
 import com.ekosp.dicoding.moviecatalogue.helper.TvshowTaskLoader;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -42,6 +40,7 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     private TvshowAdapter adapter;
 
     private static final int TVSHOW_LOADER = 51;
+    private static final int TVSHOW_FAVORITE_LOADER = 511;
 
     @BindView(R.id.rv_movies)
     RecyclerView rvMovies;
@@ -60,7 +59,7 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     }
 
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie_list, container, false);
         ButterKnife.bind(this, view);
 
@@ -70,8 +69,6 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
         rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovies.setAdapter(adapter);
 
-        Objects.requireNonNull(getActivity()).getSupportLoaderManager().initLoader(TVSHOW_LOADER, getArguments(), this);
-
         return view;
     }
 
@@ -80,10 +77,13 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
         super.onResume();
 
         Bundle args = new Bundle();
-        if (getArguments() != null && !getArguments().getBoolean(GlobalVar.PARAM_IS_FAVORITE))
+        if (getArguments() != null && getArguments().getBoolean(GlobalVar.PARAM_IS_FAVORITE)) {
+            args.putBoolean(GlobalVar.PARAM_IS_FAVORITE, true);
+            Objects.requireNonNull(getActivity()).getSupportLoaderManager().restartLoader(TVSHOW_FAVORITE_LOADER, getArguments(), this);
+        } else {
             args.putBoolean(GlobalVar.PARAM_IS_FAVORITE, false);
-
-        Objects.requireNonNull(getActivity()).getSupportLoaderManager().restartLoader(TVSHOW_LOADER, getArguments(), this);
+            Objects.requireNonNull(getActivity()).getSupportLoaderManager().initLoader(TVSHOW_LOADER, getArguments(), this);
+        }
     }
 
     @NonNull
@@ -99,7 +99,7 @@ public class TvshowListFragment extends BaseFragment implements LoaderManager.Lo
     public void onLoadFinished(@NonNull Loader<List<TvShow>> loader, List<TvShow> data) {
         dismissLoading();
 
-        if (data.size() == 0){
+        if (data.size() == 0) {
             ll_empty.setVisibility(View.VISIBLE);
         } else {
             ll_empty.setVisibility(View.GONE);

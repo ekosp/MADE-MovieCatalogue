@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_local_movies_white_24dp"/>
 
     <item
-        android:id="@+id/search_menu"
+        android:id="@+id/tv_menu"
         android:title="@string/tv_show"
         android:icon="@drawable/ic_live_tv_white_24dp"/>
 

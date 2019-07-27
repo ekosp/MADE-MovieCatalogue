@@ -16,8 +16,6 @@ import com.ekosp.dicoding.moviecatalogue.helper.DialogHelper;
 public class BaseFragment extends Fragment {
 
     private DialogHelper dialogHelper;
-//    private AppComponent appComponent;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +23,6 @@ public class BaseFragment extends Fragment {
 
         dialogHelper = new DialogHelper(getActivity());
         dialogHelper.initProgressDialog();
-//        appComponent = DaggerAppComponent.builder().appModule(new AppModule(getContext())).utilsModule(new UtilsModule()).build();
     }
 
     private DialogHelper getDialogHelper() {
@@ -42,10 +39,5 @@ public class BaseFragment extends Fragment {
     protected void showLoading() {
         getDialogHelper().showProgressDialog();
     }
-
-//    protected AppComponent getAppComponent() {
-//        return appComponent;
-//    }
-
 
 }
